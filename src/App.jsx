@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import HiraganaSelector from './components/HiraganaSelector';
 import Quiz from './components/Quiz';
 import './App.css';
@@ -6,11 +6,22 @@ import './App.css';
 function App() {
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [currentView, setCurrentView] = useState('selector'); // 'selector' or 'quiz'
-  const [layoutMode, setLayoutMode] = useState('vertical'); // 'vertical' or 'horizontal'
+  
+  // localStorage에서 저장된 레이아웃 모드를 불러오기
+  const [layoutMode, setLayoutMode] = useState(() => {
+    const saved = localStorage.getItem('hiragana-quiz-layout-mode');
+    return saved || 'horizontal'; // 기본값은 'horizontal'
+  });
+  
   const [quizSettings, setQuizSettings] = useState({
     type: 'input', // 'input' or 'choice'
     choiceCount: 3 // 3, 4, 5
   });
+
+  // layoutMode가 변경될 때마다 localStorage에 저장
+  useEffect(() => {
+    localStorage.setItem('hiragana-quiz-layout-mode', layoutMode);
+  }, [layoutMode]);
 
   const handleStartQuiz = (characters, settings) => {
     if (characters.length === 0) {
