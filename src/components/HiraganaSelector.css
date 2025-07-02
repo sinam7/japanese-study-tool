@@ -36,6 +36,47 @@
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
 }
 
+.bottom-sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.bottom-sections.horizontal-layout {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.bottom-sections.horizontal-layout .quiz-settings {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.bottom-sections.horizontal-layout .selected-characters {
+  flex: 1;
+}
+
+.bottom-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.bottom-sections.horizontal-layout {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.bottom-sections.horizontal-layout .quiz-settings {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.bottom-sections.horizontal-layout .selected-characters {
+  flex: 1;
+}
+
 .quiz-settings {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -515,5 +556,16 @@
     padding: 0.25rem;
     font-size: 0.6rem;
     min-height: 40px;
+  }
+
+  /* 모바일에서는 가로 모드라도 섹션들을 세로로 배치 */
+  .bottom-sections.horizontal-layout {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .bottom-sections.horizontal-layout .quiz-settings,
+  .bottom-sections.horizontal-layout .selected-characters {
+    flex: none;
   }
 } 
