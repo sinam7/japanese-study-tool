@@ -4,6 +4,8 @@ import './HiraganaSelector.css';
 
 const HiraganaSelector = ({ onStartQuiz }) => {
   const [selectedCharacters, setSelectedCharacters] = useState(new Set());
+  const [quizType, setQuizType] = useState('input');
+  const [choiceCount, setChoiceCount] = useState(3);
 
   // 개별 문자 토글
   const toggleCharacter = useCallback((character) => {
@@ -90,7 +92,12 @@ const HiraganaSelector = ({ onStartQuiz }) => {
   }, [selectedCharacters]);
 
   const handleStartQuiz = () => {
-    onStartQuiz(getSelectedCharactersArray());
+    const settings = {
+      type: quizType,
+      choiceCount: choiceCount,
+      autoSubmit: true // 기본값을 true로 설정
+    };
+    onStartQuiz(getSelectedCharactersArray(), settings);
   };
 
   return (
@@ -102,6 +109,50 @@ const HiraganaSelector = ({ onStartQuiz }) => {
         <div className="selected-count">
           선택된 문자: {selectedCharacters.size}개
         </div>
+      </div>
+
+      <div className="quiz-settings">
+        <h3>퀴즈 설정</h3>
+        <div className="setting-group">
+          <label>퀴즈 타입:</label>
+          <div className="radio-group">
+            <label className="radio-option">
+              <input
+                type="radio"
+                value="input"
+                checked={quizType === 'input'}
+                onChange={(e) => setQuizType(e.target.value)}
+              />
+              <span>입력형 (히라가나 → 로마자 입력)</span>
+            </label>
+            <label className="radio-option">
+              <input
+                type="radio"
+                value="choice"
+                checked={quizType === 'choice'}
+                onChange={(e) => setQuizType(e.target.value)}
+              />
+              <span>선택형 (로마자 → 히라가나 선택)</span>
+            </label>
+          </div>
+        </div>
+        
+        {quizType === 'choice' && (
+          <div className="setting-group">
+            <label>선택지 개수:</label>
+            <div className="choice-count-buttons">
+              {[3, 4, 5].map(count => (
+                <button
+                  key={count}
+                  className={`choice-count-btn ${choiceCount === count ? 'active' : ''}`}
+                  onClick={() => setChoiceCount(count)}
+                >
+                  {count}개
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="hiragana-table">

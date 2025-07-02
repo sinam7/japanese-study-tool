@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { hiraganaData } from '../data/hiragana';
 import './Quiz.css';
 
-const Quiz = ({ selectedCharacters, onBackToSelector }) => {
+const Quiz = ({ selectedCharacters, quizSettings, onBackToSelector }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState('');
   const [score, setScore] = useState(0);
@@ -9,6 +10,9 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
   const [shuffledCharacters, setShuffledCharacters] = useState([]);
+  const [choices, setChoices] = useState([]);
+  const [selectedChoice, setSelectedChoice] = useState(null);
+  const [autoSubmit, setAutoSubmit] = useState(quizSettings.autoSubmit || true);
   const nextButtonRef = useRef(null);
   const restartButtonRef = useRef(null);
   const inputRef = useRef(null);
@@ -23,32 +27,81 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
     return newArray;
   }, []);
 
+  // 모든 히라가나 데이터를 평면화
+  const getAllCharacters = useCallback(() => {
+    return hiraganaData
+      .flatMap(row => row.characters)
+      .filter(char => char !== null);
+  }, []);
+
+  // 선택지 생성 함수
+  const generateChoices = useCallback((correctAnswer, choiceCount) => {
+    const allCharacters = getAllCharacters();
+    const otherCharacters = allCharacters.filter(
+      char => char.hiragana !== correctAnswer.hiragana
+    );
+    
+    // 필요한 오답 개수 계산
+    const wrongAnswersNeeded = choiceCount - 1;
+    const shuffledOthers = shuffleArray(otherCharacters);
+    const wrongAnswers = shuffledOthers.slice(0, wrongAnswersNeeded);
+    
+    // 정답과 오답을 합쳐서 섞기
+    const allChoices = [correctAnswer, ...wrongAnswers];
+    return shuffleArray(allChoices);
+  }, [getAllCharacters, shuffleArray]);
+
   // 퀴즈 초기화
   useEffect(() => {
     if (selectedCharacters.length > 0) {
-      setShuffledCharacters(shuffleArray(selectedCharacters));
+      const shuffled = shuffleArray(selectedCharacters);
+      setShuffledCharacters(shuffled);
       setCurrentQuestionIndex(0);
       setScore(0);
       setAnswered(false);
       setQuizComplete(false);
       setUserAnswer('');
+      setSelectedChoice(null);
+      setAutoSubmit(quizSettings.autoSubmit || true);
+      
+      // 선택형 퀴즈인 경우 첫 번째 문제의 선택지 생성
+      if (quizSettings.type === 'choice' && shuffled.length > 0) {
+        setChoices(generateChoices(shuffled[0], quizSettings.choiceCount));
+      }
     }
-  }, [selectedCharacters, shuffleArray]);
+  }, [selectedCharacters, quizSettings, shuffleArray, generateChoices]);
 
   const currentCharacter = shuffledCharacters[currentQuestionIndex];
 
+  // 문제가 바뀔 때마다 선택지 생성 (선택형 퀴즈인 경우)
+  useEffect(() => {
+    if (quizSettings.type === 'choice' && currentCharacter) {
+      setChoices(generateChoices(currentCharacter, quizSettings.choiceCount));
+      setSelectedChoice(null);
+    }
+  }, [currentQuestionIndex, currentCharacter, quizSettings, generateChoices]);
+
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
-    if (answered || !userAnswer.trim()) return;
+    if (answered) return;
 
-    const correct = userAnswer.trim().toLowerCase() === currentCharacter.romaji.toLowerCase();
+    let correct = false;
+    
+    if (quizSettings.type === 'input') {
+      if (!userAnswer.trim()) return;
+      correct = userAnswer.trim().toLowerCase() === currentCharacter.romaji.toLowerCase();
+    } else if (quizSettings.type === 'choice') {
+      if (selectedChoice === null) return;
+      correct = selectedChoice.hiragana === currentCharacter.hiragana;
+    }
+    
     setIsCorrect(correct);
     setAnswered(true);
     
     if (correct) {
       setScore(prev => prev + 1);
     }
-  }, [answered, userAnswer, currentCharacter]);
+  }, [answered, userAnswer, selectedChoice, currentCharacter, quizSettings.type]);
 
   const handleNext = useCallback(() => {
     if (currentQuestionIndex + 1 >= shuffledCharacters.length) {
@@ -56,31 +109,44 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
     } else {
       setCurrentQuestionIndex(prev => prev + 1);
       setUserAnswer('');
+      setSelectedChoice(null);
       setAnswered(false);
       setIsCorrect(false);
     }
   }, [currentQuestionIndex, shuffledCharacters.length]);
 
   const handleRestart = useCallback(() => {
-    setShuffledCharacters(shuffleArray(selectedCharacters));
+    const shuffled = shuffleArray(selectedCharacters);
+    setShuffledCharacters(shuffled);
     setCurrentQuestionIndex(0);
     setScore(0);
     setAnswered(false);
     setQuizComplete(false);
     setUserAnswer('');
+    setSelectedChoice(null);
     setIsCorrect(false);
-  }, [selectedCharacters, shuffleArray]);
+    setAutoSubmit(quizSettings.autoSubmit || true);
+    
+    // 선택형 퀴즈인 경우 첫 번째 문제의 선택지 생성
+    if (quizSettings.type === 'choice' && shuffled.length > 0) {
+      setChoices(generateChoices(shuffled[0], quizSettings.choiceCount));
+    }
+  }, [selectedCharacters, quizSettings, shuffleArray, generateChoices]);
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      if (!answered && userAnswer.trim()) {
-        handleSubmit(e);
+      if (!answered) {
+        if (quizSettings.type === 'input' && userAnswer.trim()) {
+          handleSubmit(e);
+        } else if (quizSettings.type === 'choice' && selectedChoice !== null) {
+          handleSubmit(e);
+        }
       } else if (answered) {
         handleNext();
       }
     }
-  }, [answered, userAnswer, handleSubmit, handleNext]);
+  }, [answered, userAnswer, selectedChoice, quizSettings.type, handleSubmit, handleNext]);
 
   // 전체 화면에서 키보드 이벤트 감지
   useEffect(() => {
@@ -89,8 +155,12 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
         e.preventDefault();
         if (quizComplete) {
           handleRestart();
-        } else if (!answered && userAnswer.trim()) {
-          handleSubmit(e);
+        } else if (!answered) {
+          if (quizSettings.type === 'input' && userAnswer.trim()) {
+            handleSubmit(e);
+          } else if (quizSettings.type === 'choice' && selectedChoice !== null) {
+            handleSubmit(e);
+          }
         } else if (answered) {
           handleNext();
         }
@@ -99,7 +169,7 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
 
     document.addEventListener('keydown', handleGlobalKeyDown);
     return () => document.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [answered, userAnswer, quizComplete, handleSubmit, handleNext, handleRestart]);
+  }, [answered, userAnswer, selectedChoice, quizComplete, quizSettings.type, handleSubmit, handleNext, handleRestart]);
 
   // 답변 완료 후 다음 버튼에 포커스
   useEffect(() => {
@@ -114,6 +184,25 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
       restartButtonRef.current.focus();
     }
   }, [quizComplete]);
+
+  // 선택지 클릭 핸들러
+  const handleChoiceClick = useCallback((choice) => {
+    if (answered) return;
+    setSelectedChoice(choice);
+  }, [answered]);
+
+  // 선택형 퀴즈에서 자동 제출 처리
+  useEffect(() => {
+    if (quizSettings.type === 'choice' && 
+        autoSubmit && 
+        selectedChoice !== null && 
+        !answered) {
+      setTimeout(() => {
+        const fakeEvent = { preventDefault: () => {} };
+        handleSubmit(fakeEvent);
+      }, 150); // 선택 애니메이션을 볼 수 있게 딜레이
+    }
+  }, [selectedChoice, quizSettings.type, autoSubmit, answered, handleSubmit]);
 
   // 새 문제 시작 시 입력 필드에 포커스
   useEffect(() => {
@@ -193,32 +282,92 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
             점수: {score}/{currentQuestionIndex + (answered ? 1 : 0)}
           </span>
         </div>
+        
+        {quizSettings.type === 'choice' && (
+          <div className="quiz-toggle-container">
+            <label className="quiz-toggle-label">
+              <input
+                type="checkbox"
+                checked={autoSubmit}
+                onChange={(e) => setAutoSubmit(e.target.checked)}
+                className="quiz-toggle-checkbox"
+              />
+              <span className="quiz-toggle-switch"></span>
+              <span className="quiz-toggle-text">즉시 제출</span>
+            </label>
+          </div>
+        )}
       </div>
 
       <div className="question-card">
         <div className="question">
-          <h2>이 히라가나의 로마자는?</h2>
-          <div className="hiragana-display">{currentCharacter.hiragana}</div>
+          {quizSettings.type === 'input' ? (
+            <>
+              <h2>이 히라가나의 로마자는?</h2>
+              <div className="hiragana-display">{currentCharacter.hiragana}</div>
+            </>
+          ) : (
+            <>
+              <h2>이 로마자의 히라가나는?</h2>
+              <div className="romaji-display">{currentCharacter.romaji}</div>
+            </>
+          )}
         </div>
 
         <form onSubmit={handleSubmit} className="answer-form">
-          <input
-            ref={inputRef}
-            type="text"
-            value={userAnswer}
-            onChange={(e) => setUserAnswer(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="로마자를 입력하세요"
-            className={`answer-input ${answered ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
-            disabled={answered}
-            autoFocus
-          />
+          {quizSettings.type === 'input' ? (
+            <input
+              ref={inputRef}
+              type="text"
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="로마자를 입력하세요"
+              className={`answer-input ${answered ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
+              disabled={answered}
+              autoFocus
+            />
+          ) : (
+            <div className="choices-container">
+              {choices.map((choice, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  className={`choice-btn ${
+                    selectedChoice === choice ? 'selected' : ''
+                  } ${
+                    answered 
+                      ? choice.hiragana === currentCharacter.hiragana 
+                        ? 'correct' 
+                        : selectedChoice === choice 
+                          ? 'incorrect' 
+                          : 'disabled'
+                      : ''
+                  }`}
+                  onClick={() => handleChoiceClick(choice)}
+                  disabled={answered}
+                >
+                  {choice.hiragana}
+                </button>
+              ))}
+            </div>
+          )}
           
-          {!answered ? (
-            <button type="submit" className="submit-btn" disabled={!userAnswer.trim()}>
+          {!answered && !(quizSettings.type === 'choice' && autoSubmit) && (
+            <button 
+              type="submit" 
+              className="submit-btn" 
+              disabled={
+                quizSettings.type === 'input' 
+                  ? !userAnswer.trim() 
+                  : selectedChoice === null
+              }
+            >
               답안 제출
             </button>
-          ) : (
+          )}
+          
+          {answered && (
             <div className="result">
               <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
                 {isCorrect ? (
@@ -229,7 +378,13 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
                 ) : (
                   <>
                     <span className="result-icon">❌</span>
-                    <span>틀렸습니다. 정답: {currentCharacter.romaji}</span>
+                    <span>
+                      틀렸습니다. 정답: {
+                        quizSettings.type === 'input' 
+                          ? currentCharacter.romaji 
+                          : currentCharacter.hiragana
+                      }
+                    </span>
                   </>
                 )}
               </div>

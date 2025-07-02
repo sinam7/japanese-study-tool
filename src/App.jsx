@@ -6,13 +6,18 @@ import './App.css';
 function App() {
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [currentView, setCurrentView] = useState('selector'); // 'selector' or 'quiz'
+  const [quizSettings, setQuizSettings] = useState({
+    type: 'input', // 'input' or 'choice'
+    choiceCount: 3 // 3, 4, 5
+  });
 
-  const handleStartQuiz = (characters) => {
+  const handleStartQuiz = (characters, settings) => {
     if (characters.length === 0) {
       alert('최소 하나의 히라가나를 선택해주세요!');
       return;
     }
     setSelectedCharacters(characters);
+    setQuizSettings(settings);
     setCurrentView('quiz');
   };
 
@@ -32,6 +37,7 @@ function App() {
         ) : (
           <Quiz 
             selectedCharacters={selectedCharacters}
+            quizSettings={quizSettings}
             onBackToSelector={handleBackToSelector}
           />
         )}

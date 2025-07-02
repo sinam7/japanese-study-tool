@@ -40,6 +40,177 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
+.quiz-settings {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.quiz-settings h3 {
+  color: white;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.setting-group {
+  margin-bottom: 1.5rem;
+}
+
+.setting-group:last-child {
+  margin-bottom: 0;
+}
+
+.setting-group > label {
+  display: block;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.radio-option:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.radio-option input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #4facfe;
+}
+
+.radio-option span {
+  color: white;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.choice-count-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.choice-count-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.choice-count-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.choice-count-btn.active {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  border-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  transform: translateY(-2px);
+}
+
+.toggle-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  cursor: pointer !important;
+  padding: 0.75rem !important;
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  transition: all 0.3s ease !important;
+  border: 2px solid transparent !important;
+  margin-bottom: 0 !important;
+  font-size: 1rem !important;
+}
+
+.toggle-label:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.toggle-checkbox {
+  display: none !important;
+}
+
+.toggle-switch {
+  position: relative;
+  width: 50px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.toggle-switch::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-checkbox:checked + .toggle-switch {
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  border-color: #ffffff;
+}
+
+.toggle-checkbox:checked + .toggle-switch::before {
+  transform: translateX(26px);
+}
+
+.toggle-text {
+  color: white;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.setting-description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 0.5rem;
+  padding-left: 0.75rem;
+  font-style: italic;
+}
+
 .hiragana-table {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -239,5 +410,59 @@
   .selected-char {
     font-size: 0.8rem;
     padding: 0.4rem 0.6rem;
+  }
+  
+  .quiz-settings {
+    padding: 1rem;
+  }
+  
+  .quiz-settings h3 {
+    font-size: 1.1rem;
+  }
+  
+  .radio-group {
+    gap: 0.5rem;
+  }
+  
+  .radio-option {
+    padding: 0.5rem;
+  }
+  
+  .radio-option span {
+    font-size: 0.9rem;
+  }
+  
+  .choice-count-buttons {
+    gap: 0.5rem;
+  }
+  
+  .choice-count-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .toggle-label {
+    padding: 0.5rem !important;
+    gap: 0.75rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  .toggle-switch {
+    width: 40px;
+    height: 20px;
+  }
+  
+  .toggle-switch::before {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .toggle-checkbox:checked + .toggle-switch::before {
+    transform: translateX(20px);
+  }
+  
+  .setting-description {
+    font-size: 0.8rem;
+    padding-left: 0.5rem;
   }
 } 
