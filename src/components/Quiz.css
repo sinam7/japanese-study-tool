@@ -127,9 +127,12 @@
   box-shadow: 0 6px 20px rgba(79, 172, 254, 0.3);
 }
 
-.submit-btn:hover:not(:disabled) {
+.submit-btn:hover:not(:disabled),
+.submit-btn:focus:not(:disabled) {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 .submit-btn:disabled {
@@ -185,9 +188,12 @@
   box-shadow: 0 6px 20px rgba(17, 153, 142, 0.3);
 }
 
-.next-btn:hover {
+.next-btn:hover,
+.next-btn:focus {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 .quiz-controls {
@@ -207,9 +213,12 @@
   box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-.back-btn:hover {
+.back-btn:hover,
+.back-btn:focus {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 /* 퀴즈 완료 화면 */
@@ -288,9 +297,12 @@
   max-width: 300px;
 }
 
-.restart-btn:hover {
+.restart-btn:hover,
+.restart-btn:focus {
   transform: translateY(-3px);
   box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
 }
 
 .quiz-actions .back-btn {

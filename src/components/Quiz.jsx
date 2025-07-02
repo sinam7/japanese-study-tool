@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './Quiz.css';
 
 const Quiz = ({ selectedCharacters, onBackToSelector }) => {
@@ -9,6 +9,9 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [quizComplete, setQuizComplete] = useState(false);
   const [shuffledCharacters, setShuffledCharacters] = useState([]);
+  const nextButtonRef = useRef(null);
+  const restartButtonRef = useRef(null);
+  const inputRef = useRef(null);
 
   // 배열을 섞는 함수
   const shuffleArray = useCallback((array) => {
@@ -68,13 +71,56 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
     setIsCorrect(false);
   }, [selectedCharacters, shuffleArray]);
 
-  const handleKeyPress = useCallback((e) => {
-    if (e.key === 'Enter' && !answered) {
-      handleSubmit(e);
-    } else if (e.key === 'Enter' && answered) {
-      handleNext();
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!answered && userAnswer.trim()) {
+        handleSubmit(e);
+      } else if (answered) {
+        handleNext();
+      }
     }
-  }, [answered, handleSubmit, handleNext]);
+  }, [answered, userAnswer, handleSubmit, handleNext]);
+
+  // 전체 화면에서 키보드 이벤트 감지
+  useEffect(() => {
+    const handleGlobalKeyDown = (e) => {
+      if (e.key === 'Enter' && !e.target.matches('input')) {
+        e.preventDefault();
+        if (quizComplete) {
+          handleRestart();
+        } else if (!answered && userAnswer.trim()) {
+          handleSubmit(e);
+        } else if (answered) {
+          handleNext();
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleGlobalKeyDown);
+    return () => document.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [answered, userAnswer, quizComplete, handleSubmit, handleNext, handleRestart]);
+
+  // 답변 완료 후 다음 버튼에 포커스
+  useEffect(() => {
+    if (answered && nextButtonRef.current) {
+      nextButtonRef.current.focus();
+    }
+  }, [answered]);
+
+  // 퀴즈 완료 후 다시 도전하기 버튼에 포커스
+  useEffect(() => {
+    if (quizComplete && restartButtonRef.current) {
+      restartButtonRef.current.focus();
+    }
+  }, [quizComplete]);
+
+  // 새 문제 시작 시 입력 필드에 포커스
+  useEffect(() => {
+    if (!answered && !quizComplete && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [currentQuestionIndex, answered, quizComplete]);
 
   const getScorePercentage = () => {
     return Math.round((score / shuffledCharacters.length) * 100);
@@ -106,7 +152,11 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
              '다시 도전해보세요! 🔥'}
           </div>
           <div className="quiz-actions">
-            <button className="restart-btn" onClick={handleRestart}>
+            <button 
+              ref={restartButtonRef}
+              className="restart-btn" 
+              onClick={handleRestart}
+            >
               다시 도전하기
             </button>
             <button className="back-btn" onClick={onBackToSelector}>
@@ -153,10 +203,11 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
 
         <form onSubmit={handleSubmit} className="answer-form">
           <input
+            ref={inputRef}
             type="text"
             value={userAnswer}
             onChange={(e) => setUserAnswer(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="로마자를 입력하세요"
             className={`answer-input ${answered ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
             disabled={answered}
@@ -182,7 +233,11 @@ const Quiz = ({ selectedCharacters, onBackToSelector }) => {
                   </>
                 )}
               </div>
-              <button className="next-btn" onClick={handleNext}>
+              <button 
+                ref={nextButtonRef}
+                className="next-btn" 
+                onClick={handleNext}
+              >
                 {currentQuestionIndex + 1 >= shuffledCharacters.length ? '결과 보기' : '다음 문제'}
               </button>
             </div>
