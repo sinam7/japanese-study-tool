@@ -2,10 +2,27 @@ import React, { useState, useCallback } from 'react';
 import { hiraganaData, columns } from '../data/hiragana';
 import './HiraganaSelector.css';
 
-const HiraganaSelector = ({ onStartQuiz }) => {
+const HiraganaSelector = ({ onStartQuiz, layoutMode = 'vertical' }) => {
   const [selectedCharacters, setSelectedCharacters] = useState(new Set());
   const [quizType, setQuizType] = useState('input');
   const [choiceCount, setChoiceCount] = useState(3);
+
+  // 가로 모드용 전치 데이터 생성
+  const getTransposedData = useCallback(() => {
+    const transposed = [];
+    for (let colIndex = 0; colIndex < columns.length; colIndex++) {
+      const newRow = {
+        row: columns[colIndex],
+        characters: hiraganaData.map(rowData => rowData.characters[colIndex])
+      };
+      transposed.push(newRow);
+    }
+    return transposed;
+  }, []);
+
+  // 현재 레이아웃에 따른 데이터와 헤더
+  const currentData = layoutMode === 'vertical' ? hiraganaData : getTransposedData();
+  const currentColumns = layoutMode === 'vertical' ? columns : hiraganaData.map(row => row.row);
 
   // 개별 문자 토글
   const toggleCharacter = useCallback((character) => {
@@ -44,7 +61,7 @@ const HiraganaSelector = ({ onStartQuiz }) => {
 
   // 열별 전체 토글
   const toggleColumn = useCallback((columnIndex) => {
-    const columnCharacters = hiraganaData
+    const columnCharacters = currentData
       .map(row => row.characters[columnIndex])
       .filter(char => char !== null);
     
@@ -64,7 +81,7 @@ const HiraganaSelector = ({ onStartQuiz }) => {
       });
       return newSet;
     });
-  }, [selectedCharacters]);
+  }, [selectedCharacters, currentData]);
 
   // 전체 선택/해제
   const toggleAll = useCallback(() => {
@@ -114,8 +131,8 @@ const HiraganaSelector = ({ onStartQuiz }) => {
   };
 
   return (
-    <div className="hiragana-selector">
-      <div className="hiragana-table">
+    <div className={`hiragana-selector ${layoutMode === 'horizontal' ? 'wide-layout' : ''}`}>
+      <div className={`hiragana-table ${layoutMode}-mode`}>
         {/* 열 헤더 */}
         <div className="table-header">
           <button 
@@ -125,7 +142,7 @@ const HiraganaSelector = ({ onStartQuiz }) => {
           >
             {isAllSelected() ? '전체\n해제' : '전체\n선택'}
           </button>
-          {columns.map((col, colIndex) => (
+          {currentColumns.map((col, colIndex) => (
             <button
               key={col}
               className="column-header"
@@ -138,7 +155,7 @@ const HiraganaSelector = ({ onStartQuiz }) => {
         </div>
 
         {/* 각 행 */}
-        {hiraganaData.map((rowData, rowIndex) => (
+        {currentData.map((rowData, rowIndex) => (
           <div key={rowData.row} className="table-row">
             <button
               className="row-header"

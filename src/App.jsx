@@ -6,6 +6,7 @@ import './App.css';
 function App() {
   const [selectedCharacters, setSelectedCharacters] = useState([]);
   const [currentView, setCurrentView] = useState('selector'); // 'selector' or 'quiz'
+  const [layoutMode, setLayoutMode] = useState('vertical'); // 'vertical' or 'horizontal'
   const [quizSettings, setQuizSettings] = useState({
     type: 'input', // 'input' or 'choice'
     choiceCount: 3 // 3, 4, 5
@@ -29,11 +30,26 @@ function App() {
     <div className="app">
       <header className="app-header">
         <h1>🌸 히라가나 학습 퀴즈 🌸</h1>
+        <div className="header-controls">
+          <label className="layout-toggle-label">
+            <input
+              type="checkbox"
+              checked={layoutMode === 'horizontal'}
+              onChange={(e) => setLayoutMode(e.target.checked ? 'horizontal' : 'vertical')}
+              className="layout-toggle-checkbox"
+            />
+            <span className="layout-toggle-switch"></span>
+            <span className="layout-toggle-text">가로 모드</span>
+          </label>
+        </div>
       </header>
       
       <main className="app-main">
         {currentView === 'selector' ? (
-          <HiraganaSelector onStartQuiz={handleStartQuiz} />
+          <HiraganaSelector 
+            onStartQuiz={handleStartQuiz}
+            layoutMode={layoutMode}
+          />
         ) : (
           <Quiz 
             selectedCharacters={selectedCharacters}

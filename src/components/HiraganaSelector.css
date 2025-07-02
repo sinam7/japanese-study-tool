@@ -2,7 +2,14 @@
   max-width: 800px;
   width: 100%;
   margin: 0 auto;
+  transition: max-width 0.3s ease;
 }
+
+.hiragana-selector.wide-layout {
+  max-width: 1200px;
+}
+
+
 
 .select-all-btn {
   background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
@@ -207,6 +214,20 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 2rem;
+}
+
+.hiragana-table.horizontal-mode {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hiragana-table.horizontal-mode .table-header {
+  grid-template-columns: 80px repeat(11, 1fr);
+}
+
+.hiragana-table.horizontal-mode .table-row {
+  grid-template-columns: 80px repeat(11, 1fr);
 }
 
 .table-header {
@@ -453,5 +474,46 @@
   .setting-description {
     font-size: 0.8rem;
     padding-left: 0.5rem;
+  }
+  
+
+  
+  .hiragana-table.horizontal-mode {
+    padding: 1rem;
+  }
+  
+  .hiragana-table.horizontal-mode .table-header {
+    grid-template-columns: 50px repeat(11, 1fr);
+    gap: 2px;
+  }
+  
+  .hiragana-table.horizontal-mode .table-row {
+    grid-template-columns: 50px repeat(11, 1fr);
+    gap: 2px;
+  }
+  
+  .hiragana-table.horizontal-mode .character-btn {
+    height: 50px;
+    padding: 0.25rem;
+  }
+  
+  .hiragana-table.horizontal-mode .hiragana {
+    font-size: 1.2rem;
+  }
+  
+  .hiragana-table.horizontal-mode .romaji {
+    font-size: 0.7rem;
+  }
+  
+  .hiragana-table.horizontal-mode .row-header,
+  .hiragana-table.horizontal-mode .column-header {
+    padding: 0.25rem;
+    font-size: 0.8rem;
+  }
+  
+  .hiragana-table.horizontal-mode .select-all-btn {
+    padding: 0.25rem;
+    font-size: 0.6rem;
+    min-height: 40px;
   }
 } 
