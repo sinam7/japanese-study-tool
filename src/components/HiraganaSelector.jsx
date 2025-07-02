@@ -77,10 +77,23 @@ const HiraganaSelector = ({ onStartQuiz }) => {
     );
 
     if (allSelected) {
+      // 모든 문자가 선택된 경우에만 해제
       setSelectedCharacters(new Set());
     } else {
+      // 0개 또는 일부만 선택된 경우 전체 선택
       setSelectedCharacters(new Set(allCharacters.map(char => `${char.hiragana}-${char.romaji}`)));
     }
+  }, [selectedCharacters]);
+
+  // 전체 선택 상태 확인
+  const isAllSelected = useCallback(() => {
+    const allCharacters = hiraganaData
+      .flatMap(row => row.characters)
+      .filter(char => char !== null);
+    
+    return allCharacters.every(char => 
+      selectedCharacters.has(`${char.hiragana}-${char.romaji}`)
+    );
   }, [selectedCharacters]);
 
   // 선택된 문자들을 배열로 변환
@@ -102,13 +115,57 @@ const HiraganaSelector = ({ onStartQuiz }) => {
 
   return (
     <div className="hiragana-selector">
-      <div className="controls">
-        <button onClick={toggleAll} className="control-btn">
-          {selectedCharacters.size === 0 ? '전체 선택' : '전체 해제'}
-        </button>
-        <div className="selected-count">
-          선택된 문자: {selectedCharacters.size}개
+      <div className="hiragana-table">
+        {/* 열 헤더 */}
+        <div className="table-header">
+          <button 
+            className="select-all-btn"
+            onClick={toggleAll}
+            title="전체 선택/해제"
+          >
+            {isAllSelected() ? '전체\n해제' : '전체\n선택'}
+          </button>
+          {columns.map((col, colIndex) => (
+            <button
+              key={col}
+              className="column-header"
+              onClick={() => toggleColumn(colIndex)}
+              title={`${col}단 전체 선택/해제`}
+            >
+              {col}
+            </button>
+          ))}
         </div>
+
+        {/* 각 행 */}
+        {hiraganaData.map((rowData, rowIndex) => (
+          <div key={rowData.row} className="table-row">
+            <button
+              className="row-header"
+              onClick={() => toggleRow(rowData)}
+              title={`${rowData.row}행 전체 선택/해제`}
+            >
+              {rowData.row}
+            </button>
+            {rowData.characters.map((char, charIndex) => (
+              <div key={charIndex} className="character-cell">
+                {char ? (
+                  <button
+                    className={`character-btn ${
+                      selectedCharacters.has(`${char.hiragana}-${char.romaji}`) ? 'selected' : ''
+                    }`}
+                    onClick={() => toggleCharacter(char)}
+                  >
+                    <div className="hiragana">{char.hiragana}</div>
+                    <div className="romaji">{char.romaji}</div>
+                  </button>
+                ) : (
+                  <div className="empty-cell"></div>
+                )}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
 
       <div className="quiz-settings">
@@ -155,56 +212,14 @@ const HiraganaSelector = ({ onStartQuiz }) => {
         )}
       </div>
 
-      <div className="hiragana-table">
-        {/* 열 헤더 */}
-        <div className="table-header">
-          <div className="row-header"></div>
-          {columns.map((col, colIndex) => (
-            <button
-              key={col}
-              className="column-header"
-              onClick={() => toggleColumn(colIndex)}
-              title={`${col}단 전체 선택/해제`}
-            >
-              {col}
-            </button>
-          ))}
-        </div>
-
-        {/* 각 행 */}
-        {hiraganaData.map((rowData, rowIndex) => (
-          <div key={rowData.row} className="table-row">
-            <button
-              className="row-header"
-              onClick={() => toggleRow(rowData)}
-              title={`${rowData.row}행 전체 선택/해제`}
-            >
-              {rowData.row}
-            </button>
-            {rowData.characters.map((char, charIndex) => (
-              <div key={charIndex} className="character-cell">
-                {char ? (
-                  <button
-                    className={`character-btn ${
-                      selectedCharacters.has(`${char.hiragana}-${char.romaji}`) ? 'selected' : ''
-                    }`}
-                    onClick={() => toggleCharacter(char)}
-                  >
-                    <div className="hiragana">{char.hiragana}</div>
-                    <div className="romaji">{char.romaji}</div>
-                  </button>
-                ) : (
-                  <div className="empty-cell"></div>
-                )}
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-
       {selectedCharacters.size > 0 && (
         <div className="selected-characters">
-          <h3>선택된 히라가나:</h3>
+          <button className="start-quiz-btn" onClick={handleStartQuiz}>
+            퀴즈 시작하기
+          </button>
+
+          <h3>선택된 히라가나 ({selectedCharacters.size}개):</h3>
+          
           <div className="selected-list">
             {getSelectedCharactersArray().map((char, index) => (
               <span key={index} className="selected-char">
@@ -212,9 +227,6 @@ const HiraganaSelector = ({ onStartQuiz }) => {
               </span>
             ))}
           </div>
-          <button className="start-quiz-btn" onClick={handleStartQuiz}>
-            퀴즈 시작하기 ({selectedCharacters.size}개 문자)
-          </button>
         </div>
       )}
     </div>
