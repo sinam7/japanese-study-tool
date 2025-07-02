@@ -58,6 +58,17 @@ function App() {
           />
         )}
       </main>
+      
+      <footer className="app-footer">
+        <div className="footer-content">
+          <p>Copyright 2025. sinam7. All rights reserved.</p>
+          <p>
+            <a href="https://github.com/sinam7" target="_blank" rel="noopener noreferrer">
+              GitHub
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
