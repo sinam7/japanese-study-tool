@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import HiraganaSelector from './components/HiraganaSelector';
-import Quiz from './components/Quiz';
-import './App.css';
+import HiraganaSelector from './components/quiz/HiraganaSelector';
+import QuizContainer from './components/quiz/QuizContainer';
+import './styles/global.css';
 
 function App() {
   const [selectedCharacters, setSelectedCharacters] = useState([]);
@@ -62,7 +62,7 @@ function App() {
             layoutMode={layoutMode}
           />
         ) : (
-          <Quiz 
+          <QuizContainer 
             selectedCharacters={selectedCharacters}
             quizSettings={quizSettings}
             onBackToSelector={handleBackToSelector}
