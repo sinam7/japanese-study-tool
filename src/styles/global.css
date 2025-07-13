@@ -177,31 +177,36 @@
   text-shadow: 1px 1px 2px var(--color-black-30);
 }
 
+
+
+
+
+/* 반응형 디자인 */
 @media (max-width: 768px) {
   .app-header h1 {
     font-size: 2rem;
   }
-  
+
   .app-main {
     padding: 1rem;
   }
-  
+
   .app-footer {
     padding: 1rem;
   }
-  
+
   .footer-content {
     gap: 0.25rem;
   }
-  
+
   .footer-content p {
     font-size: 0.8rem;
   }
-  
+
   .footer-version {
     font-size: 0.7rem !important;
   }
-  
+
   .footer-links span {
     font-size: 0.75rem;
   }
