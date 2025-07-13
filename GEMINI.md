@@ -58,6 +58,7 @@ src/
 │   └── useQuiz.js
 ├── styles/
 │   ├── global.css
+│   ├── variable.css   # 색상 정보는 이 파일 활용
 │   └── components/
 │       ├── HiraganaSelector.css
 │       ├── Quiz.css

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import HiraganaSelector from './components/quiz/HiraganaSelector';
 import QuizContainer from './components/quiz/QuizContainer';
+import LearningPage from './components/learning/LearningPage';
 import './styles/global.css';
 
 function App() {
   const [selectedCharacters, setSelectedCharacters] = useState([]);
-  const [currentView, setCurrentView] = useState('selector'); // 'selector' or 'quiz'
+  const [currentView, setCurrentView] = useState('selector'); // 'selector', 'quiz', or 'learning'
   
   // localStorage에서 저장된 레이아웃 모드를 불러오기
   const [layoutMode, setLayoutMode] = useState(() => {
@@ -52,6 +53,12 @@ function App() {
             <span className="layout-toggle-switch"></span>
             <span className="layout-toggle-text">가로 모드</span>
           </label>
+          {currentView !== 'learning' && (
+            <button onClick={() => setCurrentView('learning')} className="header-button">학습 페이지</button>
+          )}
+          {currentView !== 'selector' && (
+            <button onClick={() => setCurrentView('selector')} className="header-button">퀴즈 페이지</button>
+          )}
         </div>
       </header>
       
@@ -61,12 +68,14 @@ function App() {
             onStartQuiz={handleStartQuiz}
             layoutMode={layoutMode}
           />
-        ) : (
+        ) : currentView === 'quiz' ? (
           <QuizContainer 
             selectedCharacters={selectedCharacters}
             quizSettings={quizSettings}
             onBackToSelector={handleBackToSelector}
           />
+        ) : (
+          <LearningPage />
         )}
       </main>
       
