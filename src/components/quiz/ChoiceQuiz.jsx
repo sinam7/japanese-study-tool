@@ -13,7 +13,7 @@ const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedCh
         <div className="choices-container">
           {choices.map((choice, index) => (
             <button
-              key={index}
+              key={choice.hiragana}
               type="button"
               className={`choice-btn ${
                 selectedChoice === choice ? 'selected' : ''
