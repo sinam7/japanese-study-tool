@@ -1,6 +1,6 @@
 import React from 'react';
-import { routeConfig } from './routeConfig';
-import './Settings.css';
+import { routeConfig } from '../../config/routes';
+import '../../styles/components/Settings.css';
 
 const Settings = () => {
   return (
@@ -43,7 +43,7 @@ const Settings = () => {
           개발자 정보
         </h3>
         <p className="developer-info">
-          새로운 페이지를 추가하려면 <code className="code-snippet">src/components/settings/routeConfig.js</code>에서 라우트 설정을 관리할 수 있습니다.
+          새로운 페이지를 추가하려면 <code className="code-snippet">src/config/routes.js</code>에서 라우트 설정을 관리할 수 있습니다.
         </p>
       </div>
     </div>

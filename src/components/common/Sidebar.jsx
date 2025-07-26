@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
-import { getSidebarMenuItems } from '../settings/routeConfig';
-import './Sidebar.css';
+import { getSidebarMenuItems } from '../../config/routes';
+import '../../styles/components/Sidebar.css';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
