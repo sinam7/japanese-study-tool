@@ -21,7 +21,7 @@
   color: var(--color-text-main);
 }
 
-.romanji {
+.romaji {
   font-size: 1.5em;
   color: var(--color-text-sub);
   margin-bottom: 10px;

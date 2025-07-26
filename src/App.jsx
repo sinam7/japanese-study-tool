@@ -6,7 +6,7 @@ import QuizContainer from './components/quiz/QuizContainer';
 import LearningPage from './components/learning/LearningPage';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
-import { getCurrentRouteConfig, shouldShowLayoutToggle, getOtherRoutes } from './components/settings/routeConfig';
+import { shouldShowLayoutToggle } from './components/settings/routeConfig';
 import './styles/global.css';
 
 function App() {

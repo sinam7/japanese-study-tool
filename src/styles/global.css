@@ -61,28 +61,7 @@
   gap: 10px; /* Add some space between controls */
 }
 
-.header-button {
-  background: var(--gradient-whitepink-pink); /* Example gradient */
-  color: var(--color-text-main);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  box-shadow: 0 4px 6px var(--color-black-10);
-  transition: all 0.3s ease;
-}
 
-.header-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px var(--color-black-20);
-}
-
-.header-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px var(--color-black-10);
-}
 
 .layout-toggle-label {
   display: inline-flex;

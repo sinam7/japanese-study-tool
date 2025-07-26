@@ -15,7 +15,7 @@ const LearningPage = () => {
                 <HiraganaCard
                   key={`${row.row}-${index}`}
                   hiragana={char.hiragana}
-                  romanji={char.romaji}
+                  romaji={char.romaji}
                   image={char.image || ''}
                   description={char.description || ''}
                 />

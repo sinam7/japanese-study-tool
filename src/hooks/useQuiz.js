@@ -32,7 +32,7 @@ const useQuiz = (selectedCharacters, quizSettings) => {
         setChoices(generateChoices(shuffled[0], quizSettings.choiceCount));
       }
     }
-  }, [selectedCharacters, quizSettings, shuffleArray, generateChoices]);
+  }, [selectedCharacters, quizSettings]);
 
   const currentCharacter = shuffledCharacters[currentQuestionIndex];
 
@@ -41,7 +41,7 @@ const useQuiz = (selectedCharacters, quizSettings) => {
       setChoices(generateChoices(currentCharacter, quizSettings.choiceCount));
       setSelectedChoice(null);
     }
-  }, [currentQuestionIndex, currentCharacter, quizSettings, generateChoices]);
+  }, [currentQuestionIndex, currentCharacter, quizSettings]);
 
   const handleSubmit = useCallback((e) => {
     e.preventDefault();
@@ -105,7 +105,7 @@ const useQuiz = (selectedCharacters, quizSettings) => {
     if (quizSettings.type === 'choice' && shuffled.length > 0) {
       setChoices(generateChoices(shuffled[0], quizSettings.choiceCount));
     }
-  }, [selectedCharacters, quizSettings, shuffleArray, generateChoices]);
+  }, [selectedCharacters, quizSettings]);
 
   const getScorePercentage = useCallback(() => {
     return Math.round((score / shuffledCharacters.length) * 100);
