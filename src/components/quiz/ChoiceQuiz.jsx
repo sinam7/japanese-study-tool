@@ -2,10 +2,6 @@ import React from 'react';
 import '../../styles/components/Quiz.css';
 
 const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedChoice, setSelectedChoice, handleSubmit, handleNext, autoSubmit, setAutoSubmit }) => {
-  
-
-  
-
   return (
     <>
       <div className="question">

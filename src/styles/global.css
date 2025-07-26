@@ -28,6 +28,10 @@
   outline-offset: 2px;
 }
 
+.hamburger-icon {
+  color: var(--color-primary);
+}
+
 .app-header {
   background: var(--color-surface-1);
   backdrop-filter: blur(10px);

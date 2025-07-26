@@ -2,10 +2,6 @@ import React, { useRef } from 'react';
 import '../../styles/components/Quiz.css';
 
 const InputQuiz = ({ currentCharacter, answered, isCorrect, userAnswer, setUserAnswer, handleSubmit, handleNext, inputRef }) => {
-  
-
-  
-
   return (
     <>
       <div className="question">

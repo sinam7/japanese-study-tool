@@ -1,11 +1,11 @@
 :root {
-  /* 기본 배경색 - 아주 연한 연노랑 (눈에 편안한 색) */
   --color-bg-main: #f0bfd2;
   --color-bg-soft: #fdf9f0;
+  --color-background: #fdf9f0; /* Sidebar.css에서 사용하는 배경색 */
   
   --color-white: white;
-  --color-surface-1: rgba(255, 255, 255, 0.08);
-  --color-surface-2: rgba(255, 255, 255, 0.1);
+  --color-surface-1: #ffffff;
+  --color-surface-2: #f8f8f8;
   --color-white-20: rgba(255, 255, 255, 0.2);
   --color-white-30: rgba(255, 255, 255, 0.3);
   --color-white-40: rgba(255, 255, 255, 0.4);

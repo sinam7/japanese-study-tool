@@ -10,20 +10,36 @@ import { shouldShowLayoutToggle } from './components/settings/routeConfig';
 import './styles/global.css';
 
 function App() {
-  const [selectedCharacters, setSelectedCharacters] = useState([]);
+  // localStorage에서 저장된 상태들을 불러오기
+  const [selectedCharacters, setSelectedCharacters] = useState(() => {
+    const saved = localStorage.getItem('hiragana-quiz-selected-characters');
+    return saved ? JSON.parse(saved) : [];
+  });
   const [layoutMode, setLayoutMode] = useState(() => {
     const saved = localStorage.getItem('hiragana-quiz-layout-mode');
     return saved || 'horizontal';
   });
-  const [quizSettings, setQuizSettings] = useState({
-    type: 'input',
-    choiceCount: 3
+  const [quizSettings, setQuizSettings] = useState(() => {
+    const saved = localStorage.getItem('hiragana-quiz-settings');
+    return saved ? JSON.parse(saved) : {
+      type: 'input',
+      choiceCount: 3
+    };
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  // localStorage에 상태들을 저장
   useEffect(() => {
     localStorage.setItem('hiragana-quiz-layout-mode', layoutMode);
   }, [layoutMode]);
+
+  useEffect(() => {
+    localStorage.setItem('hiragana-quiz-selected-characters', JSON.stringify(selectedCharacters));
+  }, [selectedCharacters]);
+
+  useEffect(() => {
+    localStorage.setItem('hiragana-quiz-settings', JSON.stringify(quizSettings));
+  }, [quizSettings]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,7 +77,7 @@ function App() {
       <header className="app-header">
         {/* 햄버거 메뉴 버튼 */}
         <button className="hamburger-menu" onClick={toggleSidebar}>
-          <Menu size={24} color="var(--color-primary)" />
+          <Menu size={24} className="hamburger-icon" />
         </button>
         
         <h1>히라가나 학습 퀴즈</h1>

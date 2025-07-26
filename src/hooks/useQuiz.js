@@ -108,7 +108,7 @@ const useQuiz = (selectedCharacters, quizSettings) => {
   }, [selectedCharacters, quizSettings]);
 
   const getScorePercentage = useCallback(() => {
-    return Math.round((score / shuffledCharacters.length) * 100);
+    return shuffledCharacters.length > 0 ? Math.round((score / shuffledCharacters.length) * 100) : 0;
   }, [score, shuffledCharacters.length]);
 
   const getScoreEmoji = useCallback(() => {
