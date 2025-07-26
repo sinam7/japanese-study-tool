@@ -21,8 +21,8 @@ const Settings = () => {
                 <span className="route-name">
                   {config.name}
                 </span>
-                <span className={`route-status ${config.showLayoutToggle ? 'supported' : 'not-supported'}`}>
-                  {config.showLayoutToggle ? '가로모드 지원' : '가로모드 미지원'}
+                <span className="route-status responsive">
+                  반응형 레이아웃
                 </span>
               </div>
               

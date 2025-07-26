@@ -2,7 +2,6 @@
 export const routeConfig = {
   '/': {
     name: '퀴즈 시작',
-    showLayoutToggle: true,
     showInSidebar: true,
     icon: '🏠',
     component: 'HiraganaSelector',
@@ -10,7 +9,6 @@ export const routeConfig = {
   },
   '/quiz': {
     name: '퀴즈',
-    showLayoutToggle: true,
     showInSidebar: false,
     icon: '❓',
     component: 'QuizContainer',
@@ -18,7 +16,6 @@ export const routeConfig = {
   },
   '/learning': {
     name: '학습',
-    showLayoutToggle: false,
     showInSidebar: true,
     icon: '📚',
     component: 'LearningPage',
@@ -26,7 +23,6 @@ export const routeConfig = {
   },
   '/settings': {
     name: '설정',
-    showLayoutToggle: false,
     showInSidebar: false,
     icon: '⚙️',
     component: 'Settings',
@@ -39,11 +35,7 @@ export const getCurrentRouteConfig = (pathname) => {
   return routeConfig[pathname] || {};
 };
 
-// 가로모드 토글 표시 여부 확인
-export const shouldShowLayoutToggle = (pathname) => {
-  const config = getCurrentRouteConfig(pathname);
-  return config.showLayoutToggle || false;
-};
+// 가로모드 토글 기능이 제거되었습니다
 
 // 현재 페이지를 제외한 다른 페이지들 가져오기
 export const getOtherRoutes = (currentPath) => {

@@ -1,11 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { hiraganaData, columns } from '../../data/hiraganaData';
 import '../../styles/components/HiraganaSelector.css';
 
-const HiraganaSelector = ({ onStartQuiz, layoutMode = 'vertical' }) => {
+const HiraganaSelector = ({ onStartQuiz }) => {
   const [selectedCharacters, setSelectedCharacters] = useState(new Set());
   const [quizType, setQuizType] = useState('input');
   const [choiceCount, setChoiceCount] = useState(3);
+  const [isWideScreen, setIsWideScreen] = useState(false);
 
   // 가로 모드용 전치 데이터 생성
   const getTransposedData = useCallback(() => {
@@ -20,9 +21,22 @@ const HiraganaSelector = ({ onStartQuiz, layoutMode = 'vertical' }) => {
     return transposed;
   }, []);
 
-  // 현재 레이아웃에 따른 데이터와 헤더
-  const currentData = layoutMode === 'vertical' ? hiraganaData : getTransposedData();
-  const currentColumns = layoutMode === 'vertical' ? columns : hiraganaData.map(row => row.row);
+  // 화면 크기에 따른 반응형 데이터
+  const currentData = isWideScreen ? getTransposedData() : hiraganaData;
+  const currentColumns = isWideScreen ? hiraganaData.map(row => row.row) : columns;
+
+  // 미디어 쿼리 감지
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(min-width: 912px)');
+    setIsWideScreen(mediaQuery.matches);
+
+    const handleChange = (e) => {
+      setIsWideScreen(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // 개별 문자 토글
   const toggleCharacter = useCallback((character) => {
@@ -131,8 +145,8 @@ const HiraganaSelector = ({ onStartQuiz, layoutMode = 'vertical' }) => {
   };
 
   return (
-    <div className={`hiragana-selector ${layoutMode === 'horizontal' ? 'wide-layout' : ''}`}>
-      <div className={`hiragana-table ${layoutMode}-mode`}>
+    <div className="hiragana-selector">
+      <div className="hiragana-table">
         {/* 열 헤더 */}
         <div className="table-header">
           <button 
@@ -185,7 +199,7 @@ const HiraganaSelector = ({ onStartQuiz, layoutMode = 'vertical' }) => {
         ))}
       </div>
 
-      <div className={`bottom-sections ${layoutMode === 'horizontal' ? 'horizontal-layout' : ''}`}>
+      <div className="bottom-sections">
         <div className="quiz-settings">
           <h3>퀴즈 설정</h3>
           <div className="setting-group">

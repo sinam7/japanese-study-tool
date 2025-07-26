@@ -6,7 +6,7 @@ import QuizContainer from './components/quiz/QuizContainer';
 import LearningPage from './components/learning/LearningPage';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
-import { shouldShowLayoutToggle } from './components/settings/routeConfig';
+
 import { LOCAL_STORAGE_KEYS, DEFAULT_VALUES } from './utils/constants';
 import './styles/global.css';
 
@@ -35,19 +35,12 @@ function App() {
   const [selectedCharacters, setSelectedCharacters] = useState(() => {
     return safeGetFromLocalStorage(LOCAL_STORAGE_KEYS.SELECTED_CHARACTERS, []);
   });
-  const [layoutMode, setLayoutMode] = useState(() => {
-    return safeGetFromLocalStorage(LOCAL_STORAGE_KEYS.LAYOUT_MODE, DEFAULT_VALUES.LAYOUT_MODE);
-  });
   const [quizSettings, setQuizSettings] = useState(() => {
     return safeGetFromLocalStorage(LOCAL_STORAGE_KEYS.QUIZ_SETTINGS, DEFAULT_VALUES.QUIZ_SETTINGS);
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // localStorage에 상태들을 저장
-  useEffect(() => {
-    safeSetToLocalStorage(LOCAL_STORAGE_KEYS.LAYOUT_MODE, layoutMode);
-  }, [layoutMode]);
-
   useEffect(() => {
     safeSetToLocalStorage(LOCAL_STORAGE_KEYS.SELECTED_CHARACTERS, selectedCharacters);
   }, [selectedCharacters]);
@@ -81,9 +74,6 @@ function App() {
     setSidebarOpen(false);
   };
 
-  // 현재 경로의 설정 가져오기
-  const showLayoutToggle = shouldShowLayoutToggle(location.pathname);
-
   return (
     <div className="app">
       {/* 사이드바 컴포넌트 */}
@@ -96,20 +86,6 @@ function App() {
         </button>
         
         <h1>히라가나 학습 퀴즈</h1>
-        <div className="header-controls">
-          {showLayoutToggle && (
-            <label className="layout-toggle-label">
-              <input
-                type="checkbox"
-                checked={layoutMode === 'horizontal'}
-                onChange={(e) => setLayoutMode(e.target.checked ? 'horizontal' : 'vertical')}
-                className="layout-toggle-checkbox"
-              />
-              <span className="layout-toggle-switch"></span>
-              <span className="layout-toggle-text">가로 모드</span>
-            </label>
-          )}
-        </div>
       </header>
       
       <main className="app-main">
@@ -117,7 +93,6 @@ function App() {
           <Route path="/" element={
             <HiraganaSelector 
               onStartQuiz={handleStartQuiz}
-              layoutMode={layoutMode}
             />
           } />
           <Route path="/quiz" element={

@@ -7,9 +7,7 @@
   transition: max-width 0.3s ease;
 }
 
-.hiragana-selector.wide-layout {
-  max-width: 1200px;
-}
+/* wide-layout 스타일은 이제 @media 쿼리로 처리됩니다 */
 
 
 
@@ -44,21 +42,7 @@
   gap: 2rem;
 }
 
-.bottom-sections.horizontal-layout {
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.bottom-sections.horizontal-layout .quiz-settings,
-.bottom-sections.horizontal-layout .selected-characters {
-  flex: 1;
-  border: 1px solid var(--color-primary);
-}
-
-.bottom-sections.horizontal-layout .quiz-settings {
-  margin-bottom: 0;
-}
+/* horizontal-layout 스타일은 이제 @media 쿼리로 처리됩니다 */
 
 .quiz-settings {
   background: var(--color-surface-1);
@@ -223,19 +207,7 @@
   margin-bottom: 2rem;
 }
 
-.hiragana-table.horizontal-mode {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.hiragana-table.horizontal-mode .table-header {
-  grid-template-columns: 80px repeat(11, 1fr);
-}
-
-.hiragana-table.horizontal-mode .table-row {
-  grid-template-columns: 80px repeat(11, 1fr);
-}
+/* 가로모드는 이제 @media 쿼리로 처리됩니다 */
 
 .table-header {
   display: grid;
@@ -481,53 +453,42 @@
   
 
   
-  .hiragana-table.horizontal-mode {
-    padding: 1rem;
-  }
-  
-  .hiragana-table.horizontal-mode .table-header {
-    grid-template-columns: 50px repeat(11, 1fr);
-    gap: 2px;
-  }
-  
-  .hiragana-table.horizontal-mode .table-row {
-    grid-template-columns: 50px repeat(11, 1fr);
-    gap: 2px;
-  }
-  
-  .hiragana-table.horizontal-mode .character-btn {
-    height: 50px;
-    padding: 0.25rem;
-  }
-  
-  .hiragana-table.horizontal-mode .hiragana {
-    font-size: 1.2rem;
-  }
-  
-  .hiragana-table.horizontal-mode .romaji {
-    font-size: 0.7rem;
-  }
-  
-  .hiragana-table.horizontal-mode .row-header,
-  .hiragana-table.horizontal-mode .column-header {
-    padding: 0.25rem;
-    font-size: 0.8rem;
-  }
-  
-  .hiragana-table.horizontal-mode .select-all-btn {
-    padding: 0.25rem;
-    font-size: 0.6rem;
-    min-height: 40px;
+     /* 모바일에서는 가로모드 스타일이 적용되지 않도록 제거됨 */
+}
+
+/* 데스크톱 및 큰 화면에서 자동으로 가로모드 레이아웃 적용 */
+@media (min-width: 912px) {
+  .hiragana-selector {
+    max-width: 1200px;
   }
 
-  /* 모바일에서는 가로 모드라도 섹션들을 세로로 배치 */
-  .bottom-sections.horizontal-layout {
-    flex-direction: column;
-    gap: 1.5rem;
+  .hiragana-table {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .hiragana-table .table-header {
+    grid-template-columns: 80px repeat(11, 1fr);
+  }
+  
+  .hiragana-table .table-row {
+    grid-template-columns: 80px repeat(11, 1fr);
   }
 
-  .bottom-sections.horizontal-layout .quiz-settings,
-  .bottom-sections.horizontal-layout .selected-characters {
-    flex: none;
+  .bottom-sections {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .bottom-sections .quiz-settings,
+  .bottom-sections .selected-characters {
+    flex: 1;
+    border: 1px solid var(--color-primary);
+  }
+
+  .bottom-sections .quiz-settings {
+    margin-bottom: 0;
   }
 }  
