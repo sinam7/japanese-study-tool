@@ -1,37 +1,15 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Menu } from 'lucide-react';
-import HiraganaSelector from './components/quiz/HiraganaSelector';
 import QuizContainer from './components/quiz/QuizContainer';
 import LearningPage from './components/learning/LearningPage';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
 
-import { DEFAULT_VALUES } from './utils/constants';
 import './styles/global.css';
 
 function App() {
-  // 세션 상태로만 관리 (저장하지 않음)
-  const [selectedCharacters, setSelectedCharacters] = useState([]);
-  const [quizSettings, setQuizSettings] = useState(DEFAULT_VALUES.QUIZ_SETTINGS);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleStartQuiz = (characters, settings) => {
-    if (characters.length === 0) {
-      alert('최소 하나의 히라가나를 선택해주세요!');
-      return;
-    }
-    setSelectedCharacters(characters);
-    setQuizSettings(settings);
-    navigate('/quiz');
-  };
-
-  const handleBackToSelector = () => {
-    navigate('/');
-  };
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -57,18 +35,8 @@ function App() {
       
       <main className="app-main">
         <Routes>
-          <Route path="/" element={
-            <HiraganaSelector 
-              onStartQuiz={handleStartQuiz}
-            />
-          } />
-          <Route path="/quiz" element={
-            <QuizContainer 
-              selectedCharacters={selectedCharacters}
-              quizSettings={quizSettings}
-              onBackToSelector={handleBackToSelector}
-            />
-          } />
+          <Route path="/" element={<QuizContainer />} />
+          <Route path="/quiz" element={<QuizContainer />} />
           <Route path="/learning" element={<LearningPage />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
