@@ -4,7 +4,7 @@ import { routeConfig } from './routeConfig';
 const Settings = () => {
   return (
     <div className="settings-container" style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
-      <h2 style={{ color: 'var(--color-white)', marginBottom: '2rem', textAlign: 'center' }}>
+      <h2 style={{ color: 'var(--color-text-primary)', marginBottom: '2rem', textAlign: 'center' }}>
         앱 설정
       </h2>
       
@@ -14,7 +14,7 @@ const Settings = () => {
         padding: '1.5rem',
         border: '1px solid var(--color-surface-2)'
       }}>
-        <h3 style={{ color: 'var(--color-white)', marginBottom: '1rem' }}>
+        <h3 style={{ color: 'var(--color-text-primary)', marginBottom: '1rem' }}>
           페이지 관리
         </h3>
         
@@ -35,7 +35,7 @@ const Settings = () => {
                 alignItems: 'center',
                 marginBottom: '0.5rem'
               }}>
-                <strong style={{ color: 'var(--color-white)' }}>
+                <strong style={{ color: 'var(--color-text-primary)' }}>
                   {config.name}
                 </strong>
                 <span style={{ 
@@ -52,7 +52,7 @@ const Settings = () => {
                 </code>
               </div>
               
-              <div style={{ color: 'var(--color-white-80)', fontSize: '0.8rem', lineHeight: '1.4' }}>
+              <div style={{ color: 'var(--color-text-secondary)', fontSize: '0.8rem', lineHeight: '1.4' }}>
                 {config.description}
               </div>
             </div>
@@ -67,10 +67,10 @@ const Settings = () => {
         border: '1px solid var(--color-surface-2)',
         marginTop: '2rem'
       }}>
-        <h3 style={{ color: 'var(--color-white)', marginBottom: '1rem' }}>
+        <h3 style={{ color: 'var(--color-text-primary)', marginBottom: '1rem' }}>
           개발자 정보
         </h3>
-        <p style={{ color: 'var(--color-white-80)', margin: 0 }}>
+        <p style={{ color: 'var(--color-text-secondary)', margin: 0 }}>
           새로운 페이지를 추가하려면 <code style={{ 
             background: 'var(--color-black-20)', 
             padding: '2px 6px', 

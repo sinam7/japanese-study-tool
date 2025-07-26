@@ -7,12 +7,33 @@
   color: var(--color-text-main);
 }
 
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.hamburger-menu:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.hamburger-menu:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .app-header {
   background: var(--color-surface-1);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;
   text-align: center;
-  border-bottom: 1px solid var(--color-surface-2);
+  border-bottom: 1px solid var(--color-border-medium);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -23,8 +44,8 @@
 .app-header h1 {
   font-size: 2.5rem;
   margin: 0;
-  color: var(--color-white);
-  text-shadow: 2px 2px 4px var(--color-black-30);
+  color: var(--color-text-primary);
+  text-shadow: none;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -33,7 +54,7 @@
 .header-controls {
   display: flex;
   justify-content: flex-end;
-  color: var(--color-white);
+  color: var(--color-text-main);
   align-items: center;
   margin-left: auto;
   background-color: var(--color-surface-1);
@@ -126,6 +147,10 @@
   text-shadow: none;
 }
 
+.app {
+  background-color: var(--color-bg-soft);
+}
+
 .app-main {
   flex: 1;
   padding: 2rem;
@@ -138,7 +163,7 @@
 .app-footer {
   background: var(--color-surface-2);
   backdrop-filter: blur(10px);
-  border-top: 1px solid var(--color-surface-1);
+  border-top: 1px solid var(--color-border-medium);
   padding: 1.5rem 2rem;
   margin-top: auto;
 }
@@ -155,13 +180,13 @@
 
 .footer-content p {
   margin: 0;
-  color: var(--color-white-80);
+  color: var(--color-text-sub);
   font-size: 0.9rem;
   text-shadow: 1px 1px 2px var(--color-black-30);
 }
 
 .footer-version {
-  color: var(--color-white-60) !important;
+  color: var(--color-gray-555) !important;
   font-size: 0.8rem !important;
   font-weight: 300;
 }
@@ -171,7 +196,7 @@
 }
 
 .footer-links span {
-  color: var(--color-white-70);
+  color: var(--color-text-sub);
   font-size: 0.85rem;
   font-style: italic;
   text-shadow: 1px 1px 2px var(--color-black-30);

@@ -41,6 +41,7 @@
 .bottom-sections {
   display: flex;
   flex-direction: column;
+  
 }
 
 .bottom-sections.horizontal-layout {
@@ -52,31 +53,12 @@
 .bottom-sections.horizontal-layout .quiz-settings {
   flex: 1;
   margin-bottom: 0;
+  border: 1px solid var(--color-primary);
 }
 
 .bottom-sections.horizontal-layout .selected-characters {
   flex: 1;
-}
-
-.bottom-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.bottom-sections.horizontal-layout {
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.bottom-sections.horizontal-layout .quiz-settings {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.bottom-sections.horizontal-layout .selected-characters {
-  flex: 1;
+  border: 1px solid var(--color-primary);
 }
 
 .quiz-settings {
@@ -85,14 +67,14 @@
   padding: 1.5rem;
   margin-bottom: 2rem;
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-surface-2);
+  border: 1px solid var(--color-primary);
 }
 
 .quiz-settings h3 {
-  color: var(--color-white);
+  color: var(--color-text-primary);
   margin-bottom: 1.5rem;
   font-size: 1.3rem;
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  text-shadow: none;
   text-align: center;
 }
 
@@ -106,11 +88,11 @@
 
 .setting-group > label {
   display: block;
-  color: var(--color-white);
+  color: var(--color-text-primary);
   font-weight: 600;
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  text-shadow: none;
 }
 
 .radio-group {
@@ -128,12 +110,12 @@
   border-radius: 8px;
   background: var(--color-surface-1);
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: 2px solid var(--color-border-light);
 }
 
 .radio-option:hover {
   background: var(--color-surface-2);
-  border-color: var(--color-surface-1);
+  border-color: var(--color-border-medium);
 }
 
 .radio-option input[type="radio"] {
@@ -143,9 +125,9 @@
 }
 
 .radio-option span {
-  color: var(--color-white);
+  color: var(--color-text-primary);
   font-weight: 500;
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  text-shadow: none;
 }
 
 .choice-count-buttons {
@@ -156,20 +138,20 @@
 
 .choice-count-btn {
   background: var(--color-surface-2);
-  color: var(--color-white);
-  border: 2px solid var(--color-surface-1);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border-medium);
   padding: 0.75rem 1.25rem;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  text-shadow: none;
 }
 
 .choice-count-btn:hover {
   background: var(--color-surface-1);
-  border-color: var(--color-white-50);
+  border-color: var(--color-primary);
   transform: translateY(-1px);
 }
 
@@ -189,14 +171,14 @@
   border-radius: 8px !important;
   background: var(--color-surface-1) !important;
   transition: all 0.3s ease !important;
-  border: 2px solid transparent !important;
+  border: 2px solid var(--color-border-light) !important;
   margin-bottom: 0 !important;
   font-size: 1rem !important;
 }
 
 .toggle-label:hover {
   background: var(--color-surface-2) !important;
-  border-color: var(--color-surface-1) !important;
+  border-color: var(--color-primary) !important;
 }
 
 .toggle-checkbox {
@@ -210,7 +192,7 @@
   background: var(--color-surface-2);
   border-radius: 12px;
   transition: all 0.3s ease;
-  border: 2px solid var(--color-white-50);
+  border: 2px solid var(--color-border-medium);
 }
 
 .toggle-switch::before {
@@ -236,15 +218,15 @@
 }
 
 .toggle-text {
-  color: var(--color-white);
+  color: var(--color-text-primary);
   font-weight: 600;
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  text-shadow: none;
 }
 
 .setting-description {
   font-size: 0.9rem;
-  color: var(--color-white-80);
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  color: var(--color-text-secondary);
+  text-shadow: none;
   margin-top: 0.5rem;
   padding-left: 0.75rem;
   font-style: italic;
@@ -255,7 +237,7 @@
   border-radius: 16px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-surface-2);
+  border: 2px solid var(--color-primary);
   margin-bottom: 2rem;
 }
 
@@ -317,7 +299,7 @@
 
 .character-btn {
   background: var(--color-white-90);
-  border: 2px solid transparent;
+  border: 2px solid var(--color-border-light);
   border-radius: 12px;
   padding: 0.75rem;
   cursor: pointer;
@@ -374,15 +356,15 @@
   border-radius: 16px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
-  border: 1px solid var(--color-surface-2);
+  border: 1px solid var(--color-primary);
   text-align: center;
 }
 
 .selected-characters h3 {
   margin: 1rem;
-  color: var(--color-white);
+  color: var(--color-text-primary);
   font-size: 1.3rem;
-  text-shadow: 1px 1px 2px var(--color-black-30);
+  text-shadow: none;
 }
 
 .selected-list {
@@ -399,13 +381,13 @@
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: var(--color-white);
+  color: var(--color-text-primary);
   backdrop-filter: blur(5px);
-  border: 1px solid var(--color-surface-1);
+  border: 1px solid var(--color-border-medium);
 }
 
 .start-quiz-btn {
-  background: var(--gradient-success);
+  background: var(--gradient-accent);
   color: var(--color-white);
   border: none;
   padding: 1rem 2rem;

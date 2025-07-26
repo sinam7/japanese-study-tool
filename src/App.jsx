@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
 import HiraganaSelector from './components/quiz/HiraganaSelector';
 import QuizContainer from './components/quiz/QuizContainer';
 import LearningPage from './components/learning/LearningPage';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
-import HamburgerMenu from './components/common/HamburgerMenu';
 import { getCurrentRouteConfig, shouldShowLayoutToggle, getOtherRoutes } from './components/settings/routeConfig';
 import './styles/global.css';
 
@@ -60,9 +60,11 @@ function App() {
 
       <header className="app-header">
         {/* 햄버거 메뉴 버튼 */}
-        <HamburgerMenu onClick={toggleSidebar} />
+        <button className="hamburger-menu" onClick={toggleSidebar}>
+          <Menu size={24} color="var(--color-primary)" />
+        </button>
         
-        <h1>🌸 히라가나 학습 퀴즈 🌸</h1>
+        <h1>히라가나 학습 퀴즈</h1>
         <div className="header-controls">
           {showLayoutToggle && (
             <label className="layout-toggle-label">
