@@ -7,38 +7,36 @@ import LearningPage from './components/learning/LearningPage';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
 import { shouldShowLayoutToggle } from './components/settings/routeConfig';
+import { LOCAL_STORAGE_KEYS, DEFAULT_VALUES } from './utils/constants';
 import './styles/global.css';
 
 function App() {
   // localStorage에서 저장된 상태들을 불러오기
   const [selectedCharacters, setSelectedCharacters] = useState(() => {
-    const saved = localStorage.getItem('hiragana-quiz-selected-characters');
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.SELECTED_CHARACTERS);
     return saved ? JSON.parse(saved) : [];
   });
   const [layoutMode, setLayoutMode] = useState(() => {
-    const saved = localStorage.getItem('hiragana-quiz-layout-mode');
-    return saved || 'horizontal';
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.LAYOUT_MODE);
+    return saved || DEFAULT_VALUES.LAYOUT_MODE;
   });
   const [quizSettings, setQuizSettings] = useState(() => {
-    const saved = localStorage.getItem('hiragana-quiz-settings');
-    return saved ? JSON.parse(saved) : {
-      type: 'input',
-      choiceCount: 3
-    };
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.QUIZ_SETTINGS);
+    return saved ? JSON.parse(saved) : DEFAULT_VALUES.QUIZ_SETTINGS;
   });
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // localStorage에 상태들을 저장
   useEffect(() => {
-    localStorage.setItem('hiragana-quiz-layout-mode', layoutMode);
+    localStorage.setItem(LOCAL_STORAGE_KEYS.LAYOUT_MODE, layoutMode);
   }, [layoutMode]);
 
   useEffect(() => {
-    localStorage.setItem('hiragana-quiz-selected-characters', JSON.stringify(selectedCharacters));
+    localStorage.setItem(LOCAL_STORAGE_KEYS.SELECTED_CHARACTERS, JSON.stringify(selectedCharacters));
   }, [selectedCharacters]);
 
   useEffect(() => {
-    localStorage.setItem('hiragana-quiz-settings', JSON.stringify(quizSettings));
+    localStorage.setItem(LOCAL_STORAGE_KEYS.QUIZ_SETTINGS, JSON.stringify(quizSettings));
   }, [quizSettings]);
 
   const navigate = useNavigate();

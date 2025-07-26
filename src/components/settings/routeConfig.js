@@ -3,24 +3,32 @@ export const routeConfig = {
   '/': {
     name: '퀴즈 시작',
     showLayoutToggle: true,
+    showInSidebar: true,
+    icon: '🏠',
     component: 'HiraganaSelector',
     description: '히라가나를 선택하고 퀴즈를 시작하는 페이지'
   },
   '/quiz': {
     name: '퀴즈',
     showLayoutToggle: true,
+    showInSidebar: false,
+    icon: '❓',
     component: 'QuizContainer',
     description: '히라가나 퀴즈를 진행하는 페이지'
   },
   '/learning': {
-    name: '학습 페이지',
+    name: '학습',
     showLayoutToggle: false,
+    showInSidebar: true,
+    icon: '📚',
     component: 'LearningPage',
     description: '히라가나 연상 학습을 위한 페이지'
   },
   '/settings': {
     name: '설정',
     showLayoutToggle: false,
+    showInSidebar: false,
+    icon: '⚙️',
     component: 'Settings',
     description: '앱 설정 및 환경설정 페이지'
   }
@@ -42,6 +50,13 @@ export const getOtherRoutes = (currentPath) => {
   return Object.entries(routeConfig)
     .filter(([path]) => path !== currentPath)
     .map(([path, config]) => ({ path, ...config }));
+};
+
+// 사이드바에 표시할 메뉴 아이템들 가져오기
+export const getSidebarMenuItems = () => {
+  return Object.entries(routeConfig)
+    .filter(([, config]) => config.showInSidebar)
+    .map(([path, { name, icon }]) => ({ path, name, icon }));
 };
 
 // 새 라우트 추가 헬퍼 (개발용)

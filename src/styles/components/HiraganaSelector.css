@@ -161,24 +161,7 @@
   transform: translateY(-2px);
 }
 
-.toggle-label {
-  display: flex !important;
-  align-items: center !important;
-  gap: 1rem !important;
-  cursor: pointer !important;
-  padding: 0.75rem !important;
-  border-radius: 8px !important;
-  background: var(--color-surface-1) !important;
-  transition: all 0.3s ease !important;
-  border: 2px solid var(--color-border-light) !important;
-  margin-bottom: 0 !important;
-  font-size: 1rem !important;
-}
 
-.toggle-label:hover {
-  background: var(--color-surface-2) !important;
-  border-color: var(--color-primary) !important;
-}
 
 .toggle-checkbox {
   display: none !important;
@@ -475,11 +458,7 @@
     font-size: 0.9rem;
   }
   
-  .toggle-label {
-    padding: 0.5rem !important;
-    gap: 0.75rem !important;
-    font-size: 0.9rem !important;
-  }
+
   
   .toggle-switch {
     width: 40px;

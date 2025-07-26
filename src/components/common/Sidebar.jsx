@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
+import { getSidebarMenuItems } from '../settings/routeConfig';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -12,11 +13,8 @@ const Sidebar = ({ isOpen, onClose }) => {
     onClose(); // 네비게이션 후 사이드바 닫기
   };
 
-  // 사이드바 메뉴 아이템들
-  const menuItems = [
-    { path: '/', name: '퀴즈 시작', icon: '🏠' },
-    { path: '/learning', name: '학습', icon: '📚' }
-  ];
+  // 사이드바 메뉴 아이템들 (routeConfig에서 동적으로 생성)
+  const menuItems = getSidebarMenuItems();
 
   return (
     <>
