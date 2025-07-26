@@ -4,7 +4,10 @@ import '../../styles/components/HiraganaSelector.css';
 
 const HiraganaSelector = ({ onStartQuiz }) => {
   const [selectedCharacters, setSelectedCharacters] = useState(new Set());
-  const [quizType, setQuizType] = useState('input');
+  // sessionStorage에서 퀴즈 타입 불러오기
+  const [quizType, setQuizType] = useState(() => {
+    return sessionStorage.getItem('quiz-type') || 'input';
+  });
   const [choiceCount, setChoiceCount] = useState(3);
   const [isWideScreen, setIsWideScreen] = useState(false);
 
@@ -24,6 +27,11 @@ const HiraganaSelector = ({ onStartQuiz }) => {
   // 화면 크기에 따른 반응형 데이터
   const currentData = isWideScreen ? getTransposedData() : hiraganaData;
   const currentColumns = isWideScreen ? hiraganaData.map(row => row.row) : columns;
+
+  // quizType을 sessionStorage에 저장
+  useEffect(() => {
+    sessionStorage.setItem('quiz-type', quizType);
+  }, [quizType]);
 
   // 미디어 쿼리 감지
   useEffect(() => {
