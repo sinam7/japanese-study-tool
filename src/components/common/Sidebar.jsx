@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { X } from 'lucide-react';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -14,9 +15,7 @@ const Sidebar = ({ isOpen, onClose }) => {
   // 사이드바 메뉴 아이템들
   const menuItems = [
     { path: '/', name: '퀴즈 시작', icon: '🏠' },
-    // { path: '/quiz', name: '퀴즈', icon: '❓' },
-    { path: '/learning', name: '학습', icon: '📚' },
-    // { path: '/settings', name: '설정', icon: '⚙️' }
+    { path: '/learning', name: '학습', icon: '📚' }
   ];
 
   return (
@@ -31,7 +30,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="sidebar-header">
           <h3>메뉴</h3>
           <button className="sidebar-close" onClick={onClose}>
-            ✕
+            <X size={24} />
           </button>
         </div>
         <ul className="sidebar-menu">
