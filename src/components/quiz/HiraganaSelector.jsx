@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
-import { hiraganaData, columns } from '../data/hiragana';
-import './HiraganaSelector.css';
+import { hiraganaData, columns } from '../../data/hiraganaData';
+import '../../styles/components/HiraganaSelector.css';
 
 const HiraganaSelector = ({ onStartQuiz, layoutMode = 'vertical' }) => {
   const [selectedCharacters, setSelectedCharacters] = useState(new Set());

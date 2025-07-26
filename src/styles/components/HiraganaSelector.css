@@ -1,3 +1,5 @@
+@import '../variables.css';
+
 .hiragana-selector {
   max-width: 800px;
   width: 100%;
@@ -12,8 +14,8 @@
 
 
 .select-all-btn {
-  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-  color: white;
+  background: var(--gradient-danger);
+  color: var(--color-white);
   border: none;
   padding: 0.75rem;
   border-radius: 8px;
@@ -21,7 +23,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+  box-shadow: 0 2px 10px var(--color-danger-bg-30);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,27 +35,7 @@
 
 .select-all-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-}
-
-.bottom-sections {
-  display: flex;
-  flex-direction: column;
-}
-
-.bottom-sections.horizontal-layout {
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 2rem;
-}
-
-.bottom-sections.horizontal-layout .quiz-settings {
-  flex: 1;
-  margin-bottom: 0;
-}
-
-.bottom-sections.horizontal-layout .selected-characters {
-  flex: 1;
+  box-shadow: 0 4px 15px var(--color-danger-bg-40);
 }
 
 .bottom-sections {
@@ -68,29 +50,30 @@
   gap: 2rem;
 }
 
-.bottom-sections.horizontal-layout .quiz-settings {
-  flex: 1;
-  margin-bottom: 0;
-}
-
+.bottom-sections.horizontal-layout .quiz-settings,
 .bottom-sections.horizontal-layout .selected-characters {
   flex: 1;
+  border: 1px solid var(--color-primary);
+}
+
+.bottom-sections.horizontal-layout .quiz-settings {
+  margin-bottom: 0;
 }
 
 .quiz-settings {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-1);
   border-radius: 16px;
   padding: 1.5rem;
   margin-bottom: 2rem;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--color-primary);
 }
 
 .quiz-settings h3 {
-  color: white;
+  color: var(--color-text-primary);
   margin-bottom: 1.5rem;
   font-size: 1.3rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
   text-align: center;
 }
 
@@ -104,11 +87,11 @@
 
 .setting-group > label {
   display: block;
-  color: white;
+  color: var(--color-text-primary);
   font-weight: 600;
   margin-bottom: 0.75rem;
   font-size: 1.1rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
 }
 
 .radio-group {
@@ -124,26 +107,26 @@
   cursor: pointer;
   padding: 0.75rem;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-1);
   transition: all 0.3s ease;
-  border: 2px solid transparent;
+  border: 2px solid var(--color-border-light);
 }
 
 .radio-option:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
+  background: var(--color-surface-2);
+  border-color: var(--color-border-medium);
 }
 
 .radio-option input[type="radio"] {
   width: 20px;
   height: 20px;
-  accent-color: #4facfe;
+  accent-color: var(--color-primary);
 }
 
 .radio-option span {
-  color: white;
+  color: var(--color-text-primary);
   font-weight: 500;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
 }
 
 .choice-count-buttons {
@@ -153,49 +136,32 @@
 }
 
 .choice-count-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border-medium);
   padding: 0.75rem 1.25rem;
   border-radius: 8px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
 }
 
 .choice-count-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: var(--color-surface-1);
+  border-color: var(--color-primary);
   transform: translateY(-1px);
 }
 
 .choice-count-btn.active {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  border-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+  background: var(--gradient-accent);
+  border-color: var(--color-white);
+  box-shadow: 0 4px 15px var(--color-primary-light);
   transform: translateY(-2px);
 }
 
-.toggle-label {
-  display: flex !important;
-  align-items: center !important;
-  gap: 1rem !important;
-  cursor: pointer !important;
-  padding: 0.75rem !important;
-  border-radius: 8px !important;
-  background: rgba(255, 255, 255, 0.1) !important;
-  transition: all 0.3s ease !important;
-  border: 2px solid transparent !important;
-  margin-bottom: 0 !important;
-  font-size: 1rem !important;
-}
 
-.toggle-label:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
-  border-color: rgba(255, 255, 255, 0.3) !important;
-}
 
 .toggle-checkbox {
   display: none !important;
@@ -205,10 +171,10 @@
   position: relative;
   width: 50px;
   height: 24px;
-  background: rgba(255, 255, 255, 0.3);
+  background: var(--color-surface-2);
   border-radius: 12px;
   transition: all 0.3s ease;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--color-border-medium);
 }
 
 .toggle-switch::before {
@@ -218,15 +184,15 @@
   left: 2px;
   width: 16px;
   height: 16px;
-  background: white;
+  background: var(--color-white);
   border-radius: 50%;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px var(--color-black-20);
 }
 
 .toggle-checkbox:checked + .toggle-switch {
-  background: linear-gradient(135deg, #11998e, #38ef7d);
-  border-color: #ffffff;
+  background: var(--gradient-success);
+  border-color: var(--color-white);
 }
 
 .toggle-checkbox:checked + .toggle-switch::before {
@@ -234,26 +200,26 @@
 }
 
 .toggle-text {
-  color: white;
+  color: var(--color-text-primary);
   font-weight: 600;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
 }
 
 .setting-description {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  color: var(--color-text-secondary);
+  text-shadow: none;
   margin-top: 0.5rem;
   padding-left: 0.75rem;
   font-style: italic;
 }
 
 .hiragana-table {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-1);
   border-radius: 16px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--color-primary);
   margin-bottom: 2rem;
 }
 
@@ -286,8 +252,8 @@
 }
 
 .row-header, .column-header {
-  background: linear-gradient(135deg, #4facfe, #00f2fe);
-  color: white;
+  background: var(--gradient-accent);
+  color: var(--color-white);
   border: none;
   padding: 0.75rem;
   border-radius: 8px;
@@ -295,7 +261,7 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 10px rgba(79, 172, 254, 0.3);
+  box-shadow: 0 2px 10px var(--color-primary-light);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -303,7 +269,7 @@
 
 .row-header:hover, .column-header:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 4px 15px var(--color-primary-dark);
 }
 
 .character-cell {
@@ -314,8 +280,8 @@
 }
 
 .character-btn {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid transparent;
+  background: var(--color-white-90);
+  border: 2px solid var(--color-border-light);
   border-radius: 12px;
   padding: 0.75rem;
   cursor: pointer;
@@ -326,41 +292,41 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px var(--color-black-10);
 }
 
 .character-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  border-color: #4facfe;
+  box-shadow: 0 4px 15px var(--color-black-20);
+  border-color: var(--color-primary);
 }
 
 .character-btn.selected {
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  border-color: #ffffff;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  background: var(--gradient-primary);
+  color: var(--color-white);
+  border-color: var(--color-white);
+  box-shadow: 0 4px 15px var(--gradient-primary-dark);
 }
 
 .hiragana {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 0.25rem;
-  color: #333;
+  color: var(--color-text-main);
 }
 
 .character-btn.selected .hiragana {
-  color: white;
+  color: var(--color-white);
 }
 
 .romaji {
   font-size: 0.9rem;
   font-weight: 500;
-  color: #666;
+  color: var(--color-text-sub);
 }
 
 .character-btn.selected .romaji {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-white-90);
 }
 
 .empty-cell {
@@ -368,19 +334,19 @@
 }
 
 .selected-characters {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-1);
   border-radius: 16px;
   padding: 1.5rem;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--color-primary);
   text-align: center;
 }
 
 .selected-characters h3 {
   margin: 1rem;
-  color: white;
+  color: var(--color-text-primary);
   font-size: 1.3rem;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  text-shadow: none;
 }
 
 .selected-list {
@@ -392,19 +358,19 @@
 }
 
 .selected-char {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-surface-2);
   padding: 0.5rem 0.75rem;
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
-  color: white;
+  color: var(--color-text-primary);
   backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--color-border-medium);
 }
 
 .start-quiz-btn {
-  background: linear-gradient(135deg, #11998e, #38ef7d);
-  color: white;
+  background: var(--gradient-accent);
+  color: var(--color-white);
   border: none;
   padding: 1rem 2rem;
   border-radius: 50px;
@@ -412,12 +378,12 @@
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(17, 153, 142, 0.3);
+  box-shadow: 0 6px 20px var(--color-success-bg-30);
 }
 
 .start-quiz-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(17, 153, 142, 0.4);
+  box-shadow: 0 8px 25px var(--color-success-bg-40);
 }
 
 @media (max-width: 768px) {
@@ -492,11 +458,7 @@
     font-size: 0.9rem;
   }
   
-  .toggle-label {
-    padding: 0.5rem !important;
-    gap: 0.75rem !important;
-    font-size: 0.9rem !important;
-  }
+
   
   .toggle-switch {
     width: 40px;
@@ -568,4 +530,4 @@
   .bottom-sections.horizontal-layout .selected-characters {
     flex: none;
   }
-} 
+}  

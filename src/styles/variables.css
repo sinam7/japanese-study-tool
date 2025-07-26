@@ -1,0 +1,92 @@
+:root {
+  --color-bg-main: #f0bfd2;
+  --color-bg-soft: #fdf9f0;
+  --color-background: #fdf9f0; /* Sidebar.css에서 사용하는 배경색 */
+  
+  --color-white: white;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #f8f8f8;
+  --color-white-20: rgba(255, 255, 255, 0.2);
+  --color-white-30: rgba(255, 255, 255, 0.3);
+  --color-white-40: rgba(255, 255, 255, 0.4);
+  --color-white-50: rgba(255, 255, 255, 0.5);
+  --color-white-60: rgba(255, 255, 255, 0.6);
+  --color-white-70: rgba(255, 255, 255, 0.7);
+  --color-white-80: rgba(255, 255, 255, 0.8);
+  --color-white-90: rgba(255, 255, 255, 0.9);
+  --color-black-10: rgba(0, 0, 0, 0.1);
+  --color-black-15: rgba(0, 0, 0, 0.15);
+  --color-black-20: rgba(0, 0, 0, 0.2);
+  --color-black-30: rgba(0, 0, 0, 0.3);
+  --color-black-40: rgba(0, 0, 0, 0.4);
+  
+  /* 회색 톤 - 검정 계열로 변경 */
+  --color-gray-ccc: #ccc;
+  --color-text-main: #333;
+  --color-text-sub: #666;
+  --color-gray-555: #555;
+  
+  /* 새로운 검은색 텍스트 변수들 */
+  --color-text-dark: #222;
+  --color-text-medium: #444;
+  --color-text-light: #666;
+  --color-text-primary: #2c2c2c;
+  --color-text-secondary: #555;
+  
+  /* border용 색상들 */
+  --color-border-light: #ddd;
+  --color-border-medium: #bbb;
+  --color-border-dark: #999;
+  
+  /* 벚꽃 분홍 - 프라이머리 색상 */
+  --color-primary: #e8a5c0;
+  --color-primary-light: rgba(232, 165, 192, 0.3);
+  --color-primary-dark: rgba(232, 165, 192, 0.6);
+  
+  /* 벚꽃 연두 - 성공 색상 */
+  --color-success: #9bc5a2;
+  --color-success-border: #7a9a82;
+  --color-success-bg: #f0f7f1;
+  --color-green-light-alt: #e5f2e7;
+  --color-success-bg-30: rgba(155, 197, 162, 0.3);
+  --color-success-bg-40: rgba(155, 197, 162, 0.4);
+  
+  /* 부드러운 연분홍 - 위험 색상 */
+  --color-danger: #e8a5a5;
+  --color-danger-border: #c58a8a;
+  --color-danger-bg: #f7f0f0;
+  --color-red-light-alt: #f2e5e5;
+  --color-danger-bg-30: rgba(232, 165, 165, 0.3);
+  --color-danger-bg-40: rgba(232, 165, 165, 0.4);
+  
+  /* 추가 색상들 */
+  --color-green-light: #e5f2e7;
+  --color-green-darker: #4a6741;
+  --color-green-dark: #5a7a52;
+  --color-red-light: #f2e5e5;
+  --color-red-darker: #8a4a4a;
+  --color-red-dark: #a85a5a;
+  
+  /* 그라디언트 추가 색상들 */
+  --color-blue-accent-30: rgba(100, 149, 237, 0.3);
+  --color-blue-accent-40: rgba(100, 149, 237, 0.4);
+  --color-green-emerald-30: rgba(46, 204, 113, 0.3);
+  --color-green-emerald-40: rgba(46, 204, 113, 0.4);
+  --gradient-blue-purple-40: rgba(138, 43, 226, 0.4);
+  --color-red-light-30: rgba(231, 76, 60, 0.3);
+  --color-red-light-40: rgba(231, 76, 60, 0.4);
+  
+  /* 벚꽃 테마 그라디언트 */
+  --gradient-whitepink-pink: linear-gradient(135deg, #fdf5f8, #f4d5e0);
+  --gradient-primary: linear-gradient(135deg, #f4d5e0, #e8a5c0);
+  --gradient-primary-dark: rgba(232, 165, 192, 0.4);
+  --gradient-accent: linear-gradient(135deg, #e8a5c0, #d1a3d1);
+  --gradient-success: linear-gradient(135deg, #9bc5a2, #b8d4bf);
+  --gradient-danger: linear-gradient(135deg, #e8a5a5, #f0c4c4);
+  
+  /* 퀴즈용 추가 그라디언트들 */
+  --gradient-blue-cyan: linear-gradient(135deg, #6495ed, #87ceeb);
+  --gradient-green-emerald: linear-gradient(135deg, #2ecc71, #27ae60);
+  --gradient-blue-purple: linear-gradient(135deg, #8a2be2, #9370db);
+  --gradient-red-pink: linear-gradient(135deg, #e74c3c, #ec7063);
+}
