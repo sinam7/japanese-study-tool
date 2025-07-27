@@ -1,0 +1,27 @@
+@import '../../../config/variables.css';
+
+.hiraganaSelector {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  transition: max-width 0.3s ease;
+}
+
+.bottomSections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* 데스크톱 및 큰 화면에서 자동으로 가로모드 레이아웃 적용 */
+@media (min-width: 912px) {
+  .hiraganaSelector {
+    max-width: 1200px;
+  }
+
+  .bottomSections {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+} 

@@ -1,0 +1,142 @@
+@import '../../../config/variables.css';
+
+.quizSettings {
+  background: var(--color-surface-1);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--color-primary);
+}
+
+.quizSettings h3 {
+  color: var(--color-text-primary);
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  text-shadow: none;
+  text-align: center;
+}
+
+.settingGroup {
+  margin-bottom: 1.5rem;
+}
+
+.settingGroup:last-child {
+  margin-bottom: 0;
+}
+
+.settingGroup > label {
+  display: block;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+  text-shadow: none;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: var(--color-surface-1);
+  transition: all 0.3s ease;
+  border: 2px solid var(--color-border-light);
+}
+
+.radioOption:hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-border-medium);
+}
+
+.radioOption input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+}
+
+.radioOption span {
+  color: var(--color-text-primary);
+  font-weight: 500;
+  text-shadow: none;
+}
+
+.choiceCountButtons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.choiceCountBtn {
+  background: var(--color-surface-2);
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-border-medium);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-shadow: none;
+}
+
+.choiceCountBtn:hover {
+  background: var(--color-surface-1);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.choiceCountBtn.active {
+  background: var(--gradient-accent);
+  border-color: var(--color-white);
+  box-shadow: 0 4px 15px var(--color-primary-light);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .quizSettings {
+    padding: 1rem;
+  }
+  
+  .quizSettings h3 {
+    font-size: 1.1rem;
+  }
+  
+  .radioGroup {
+    gap: 0.5rem;
+  }
+  
+  .radioOption {
+    padding: 0.5rem;
+  }
+  
+  .radioOption span {
+    font-size: 0.9rem;
+  }
+  
+  .choiceCountButtons {
+    gap: 0.5rem;
+  }
+  
+  .choiceCountBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* 데스크톱에서 가로 레이아웃 적용 시 */
+@media (min-width: 912px) {
+  .quizSettings {
+    flex: 1;
+    border: 1px solid var(--color-primary);
+    margin-bottom: 0;
+  }
+} 

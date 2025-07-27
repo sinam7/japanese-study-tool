@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/components/HiraganaSelector.css';
+import styles from './QuizSettings.module.css';
 
 const QuizSettings = ({ 
   quizType, 
@@ -8,12 +8,12 @@ const QuizSettings = ({
   setChoiceCount 
 }) => {
   return (
-    <div className="quiz-settings">
+    <div className={styles.quizSettings}>
       <h3>퀴즈 설정</h3>
-      <div className="setting-group">
+      <div className={styles.settingGroup}>
         <label>퀴즈 타입:</label>
-        <div className="radio-group">
-          <label className="radio-option">
+        <div className={styles.radioGroup}>
+          <label className={styles.radioOption}>
             <input
               type="radio"
               value="input"
@@ -22,7 +22,7 @@ const QuizSettings = ({
             />
             <span>입력형 (히라가나 → 로마자 입력)</span>
           </label>
-          <label className="radio-option">
+          <label className={styles.radioOption}>
             <input
               type="radio"
               value="choice"
@@ -35,13 +35,13 @@ const QuizSettings = ({
       </div>
       
       {quizType === 'choice' && (
-        <div className="setting-group">
+        <div className={styles.settingGroup}>
           <label>선택지 개수:</label>
-          <div className="choice-count-buttons">
+          <div className={styles.choiceCountButtons}>
             {[3, 4, 5].map(count => (
               <button
                 key={count}
-                className={`choice-count-btn ${choiceCount === count ? 'active' : ''}`}
+                className={`${styles.choiceCountBtn} ${choiceCount === count ? styles.active : ''}`}
                 onClick={() => setChoiceCount(count)}
               >
                 {count}개

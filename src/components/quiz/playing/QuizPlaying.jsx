@@ -4,7 +4,8 @@ import InputQuiz from './InputQuiz';
 import ChoiceQuiz from './ChoiceQuiz';
 import QuizResult from './QuizResult';
 import useQuiz from '../../../hooks/useQuiz';
-import '../../../styles/components/Quiz.css';
+import styles from './QuizPlaying.module.css';
+import sharedStyles from './shared.module.css';
 
 const QuizPlaying = ({ selectedCharacters, quizSettings, onBackToSelector }) => {
   const { 
@@ -83,21 +84,21 @@ const QuizPlaying = ({ selectedCharacters, quizSettings, onBackToSelector }) => 
 
   if (!currentCharacter) {
     return (
-      <div className="quiz-loading">
+      <div className={styles.quizLoading}>
         <p>퀴즈를 준비하고 있습니다...</p>
       </div>
     );
   }
 
   return (
-    <div className="quiz">
+    <div className={styles.quiz}>
       <QuizProgress
         currentQuestionIndex={currentQuestionIndex}
         totalQuestions={shuffledCharacters.length}
         score={score}
       />
 
-      <div className="question-card">
+      <div className={styles.questionCard}>
         {quizSettings.type === 'input' ? (
           <InputQuiz
             currentCharacter={currentCharacter}
@@ -125,8 +126,8 @@ const QuizPlaying = ({ selectedCharacters, quizSettings, onBackToSelector }) => 
         )}
       </div>
 
-      <div className="quiz-controls">
-        <button className="back-btn" onClick={onBackToSelector}>
+      <div className={styles.quizControls}>
+        <button className={sharedStyles.backBtn} onClick={onBackToSelector}>
           선택 화면으로 돌아가기
         </button>
       </div>

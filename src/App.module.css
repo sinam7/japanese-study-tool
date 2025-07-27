@@ -1,13 +1,14 @@
-@import './variables.css';
+@import './config/variables.css';
 
 .app {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   color: var(--color-text-main);
+  background-color: var(--color-bg-soft);
 }
 
-.hamburger-menu {
+.hamburgerMenu {
   background: none;
   border: none;
   cursor: pointer;
@@ -19,20 +20,20 @@
   transition: background-color 0.2s;
 }
 
-.hamburger-menu:hover {
+.hamburgerMenu:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-.hamburger-menu:focus {
+.hamburgerMenu:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-.hamburger-icon {
+.hamburgerIcon {
   color: var(--color-primary);
 }
 
-.app-header {
+.appHeader {
   background: var(--color-surface-1);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;
@@ -45,7 +46,7 @@
   position: relative;
 }
 
-.app-header h1 {
+.appHeader h1 {
   font-size: 2.5rem;
   margin: 0;
   color: var(--color-text-primary);
@@ -55,7 +56,7 @@
   transform: translateX(-50%);
 }
 
-.header-controls {
+.headerControls {
   display: flex;
   justify-content: flex-end;
   color: var(--color-text-main);
@@ -65,15 +66,7 @@
   gap: 10px;
 }
 
-
-
-/* 가로모드 토글 버튼 스타일이 제거되었습니다 */
-
-.app {
-  background-color: var(--color-bg-soft);
-}
-
-.app-main {
+.appMain {
   flex: 1;
   padding: 2rem;
   display: flex;
@@ -82,7 +75,7 @@
   justify-content: flex-start;
 }
 
-.app-footer {
+.appFooter {
   background: var(--color-surface-2);
   backdrop-filter: blur(10px);
   border-top: 1px solid var(--color-border-medium);
@@ -90,7 +83,7 @@
   margin-top: auto;
 }
 
-.footer-content {
+.footerContent {
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
@@ -100,61 +93,57 @@
   gap: 0.5rem;
 }
 
-.footer-content p {
+.footerContent p {
   margin: 0;
   color: var(--color-text-sub);
   font-size: 0.9rem;
   text-shadow: 1px 1px 2px var(--color-black-30);
 }
 
-.footer-version {
+.footerVersion {
   color: var(--color-gray-555) !important;
   font-size: 0.8rem !important;
   font-weight: 300;
 }
 
-.footer-links {
+.footerLinks {
   margin-top: 0.5rem;
 }
 
-.footer-links span {
+.footerLinks span {
   color: var(--color-text-sub);
   font-size: 0.85rem;
   font-style: italic;
   text-shadow: 1px 1px 2px var(--color-black-30);
 }
 
-
-
-
-
 /* 반응형 디자인 */
 @media (max-width: 768px) {
-  .app-header h1 {
+  .appHeader h1 {
     font-size: 2rem;
   }
 
-  .app-main {
+  .appMain {
     padding: 1rem;
   }
 
-  .app-footer {
+  .appFooter {
     padding: 1rem;
   }
 
-  .footer-content {
+  .footerContent {
     gap: 0.25rem;
   }
 
-  .footer-content p {
+  .footerContent p {
     font-size: 0.8rem;
   }
 
-  .footer-version {
+  .footerVersion {
     font-size: 0.7rem !important;
   }
 
-  .footer-links span {
+  .footerLinks span {
     font-size: 0.75rem;
   }
-}  
+} 

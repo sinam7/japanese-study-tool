@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import QuizPreparation from './preparation/QuizPreparation';
 import QuizPlaying from './playing/QuizPlaying';
-import '../../styles/components/Quiz.css';
 
 const QuizContainer = () => {
   const [isQuizStarted, setIsQuizStarted] = useState(false);

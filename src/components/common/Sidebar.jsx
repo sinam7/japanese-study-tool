@@ -2,7 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { X } from 'lucide-react';
 import { getSidebarMenuItems } from '../../config/routes';
-import '../../styles/components/Sidebar.css';
+import styles from './Sidebar.module.css';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const location = useLocation();
@@ -20,23 +20,23 @@ const Sidebar = ({ isOpen, onClose }) => {
     <>
       {/* 사이드바 오버레이 */}
       {isOpen && (
-        <div className="sidebar-overlay" onClick={onClose} />
+        <div className={styles.sidebarOverlay} onClick={onClose} />
       )}
       
       {/* 사이드바 */}
-      <nav className={`sidebar ${isOpen ? 'sidebar-open' : ''}`}>
-        <div className="sidebar-header">
+      <nav className={`${styles.sidebar} ${isOpen ? styles.sidebarOpen : ''}`}>
+        <div className={styles.sidebarHeader}>
           <h3>메뉴</h3>
-          <button className="sidebar-close" onClick={onClose}>
+          <button className={styles.sidebarClose} onClick={onClose}>
             <X size={24} />
           </button>
         </div>
-        <ul className="sidebar-menu">
+        <ul className={styles.sidebarMenu}>
           {menuItems.map(({ path, name, icon }) => (
-            <li key={path} className={location.pathname === path ? 'active' : ''}>
+            <li key={path} className={location.pathname === path ? styles.menuItemActive : ''}>
               <button onClick={() => handleNavigate(path)}>
-                <span className="menu-icon">{icon}</span>
-                <span className="menu-text">{name}</span>
+                <span className={styles.menuIcon}>{icon}</span>
+                <span className={styles.menuText}>{name}</span>
               </button>
             </li>
           ))}

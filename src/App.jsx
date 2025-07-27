@@ -6,7 +6,7 @@ import LearningPage from './components/learning/LearningPage';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
 
-import './styles/global.css';
+import styles from './App.module.css';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -20,20 +20,20 @@ function App() {
   };
 
   return (
-    <div className="app">
+    <div className={styles.app}>
       {/* 사이드바 컴포넌트 */}
       <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
 
-      <header className="app-header">
+      <header className={styles.appHeader}>
         {/* 햄버거 메뉴 버튼 */}
-        <button className="hamburger-menu" onClick={toggleSidebar}>
-          <Menu size={24} className="hamburger-icon" />
+        <button className={styles.hamburgerMenu} onClick={toggleSidebar}>
+          <Menu size={24} className={styles.hamburgerIcon} />
         </button>
         
         <h1>히라가나 학습 퀴즈</h1>
       </header>
       
-      <main className="app-main">
+      <main className={styles.appMain}>
         <Routes>
           <Route path="/" element={<QuizContainer />} />
           <Route path="/quiz" element={<QuizContainer />} />
@@ -42,8 +42,8 @@ function App() {
         </Routes>
       </main>
       
-      <footer className="app-footer">
-        <div className="footer-content">
+      <footer className={styles.appFooter}>
+        <div className={styles.footerContent}>
           <p>Copyright 2025. sinam7. All rights reserved.</p>
           <p>
             <a href="https://github.com/sinam7" target="_blank" rel="noopener noreferrer">

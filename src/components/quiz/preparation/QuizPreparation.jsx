@@ -3,7 +3,7 @@ import HiraganaTable from './HiraganaTable';
 import QuizSettings from './QuizSettings';
 import SelectedCharactersList from './SelectedCharactersList';
 import useHiraganaSelector from '../../../hooks/useHiraganaSelector';
-import '../../../styles/components/HiraganaSelector.css';
+import styles from './QuizPreparation.module.css';
 
 const QuizPreparation = ({ onStartQuiz }) => {
   const {
@@ -37,7 +37,7 @@ const QuizPreparation = ({ onStartQuiz }) => {
   };
 
   return (
-    <div className="hiragana-selector">
+    <div className={styles.hiraganaSelector}>
       <HiraganaTable
         selectedCharacters={selectedCharacters}
         currentData={currentData}
@@ -49,7 +49,7 @@ const QuizPreparation = ({ onStartQuiz }) => {
         toggleAll={toggleAll}
       />
 
-      <div className="bottom-sections">
+      <div className={styles.bottomSections}>
         <QuizSettings
           quizType={quizType}
           setQuizType={setQuizType}

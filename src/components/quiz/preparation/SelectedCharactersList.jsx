@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/components/HiraganaSelector.css';
+import styles from './SelectedCharactersList.module.css';
 
 const SelectedCharactersList = ({ 
   selectedCharacters, 
@@ -11,16 +11,16 @@ const SelectedCharactersList = ({
   }
 
   return (
-    <div className="selected-characters">
-      <button className="start-quiz-btn" onClick={onStartQuiz}>
+    <div className={styles.selectedCharacters}>
+      <button className={styles.startQuizBtn} onClick={onStartQuiz}>
         퀴즈 시작하기
       </button>
 
       <h3>선택된 히라가나 ({selectedCharacters.size}개):</h3>
       
-      <div className="selected-list">
+      <div className={styles.selectedList}>
         {selectedCharactersArray.map((char, index) => (
-          <span key={index} className="selected-char">
+          <span key={index} className={styles.selectedChar}>
             {char.hiragana}({char.romaji})
           </span>
         ))}

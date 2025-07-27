@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/components/Quiz.css';
+import styles from './QuizProgress.module.css';
 
 const QuizProgress = ({ 
   currentQuestionIndex, 
@@ -7,18 +7,18 @@ const QuizProgress = ({
   score 
 }) => {
   return (
-    <div className="quiz-header">
-      <div className="progress-bar">
+    <div className={styles.quizHeader}>
+      <div className={styles.progressBar}>
         <div 
-          className="progress-fill"
+          className={styles.progressFill}
           style={{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }}
         ></div>
       </div>
-      <div className="quiz-info">
-        <span className="question-number">
+      <div className={styles.quizInfo}>
+        <span className={styles.questionNumber}>
           {currentQuestionIndex + 1} / {totalQuestions}
         </span>
-        <span className="current-score">
+        <span className={styles.currentScore}>
           점수: {score}/{currentQuestionIndex + 1}
         </span>
       </div>

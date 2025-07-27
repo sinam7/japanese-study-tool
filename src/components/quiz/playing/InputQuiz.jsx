@@ -1,22 +1,23 @@
 import React, { useRef } from 'react';
-import '../../../styles/components/Quiz.css';
+import styles from './InputQuiz.module.css';
+import sharedStyles from './shared.module.css';
 
 const InputQuiz = ({ currentCharacter, answered, isCorrect, userAnswer, setUserAnswer, handleSubmit, handleNext, inputRef }) => {
   return (
     <>
-      <div className="question">
+      <div className={sharedStyles.question}>
         <h2>이 히라가나의 로마자는?</h2>
-        <div className="hiragana-display">{currentCharacter.hiragana}</div>
+        <div className={styles.hiraganaDisplay}>{currentCharacter.hiragana}</div>
       </div>
 
-      <form onSubmit={handleSubmit} className="answer-form">
+      <form onSubmit={handleSubmit} className={sharedStyles.answerForm}>
         <input
           ref={inputRef}
           type="text"
           value={userAnswer}
           onChange={(e) => setUserAnswer(e.target.value)}
           placeholder="로마자를 입력하세요"
-          className={`answer-input ${answered ? (isCorrect ? 'correct' : 'incorrect') : ''}`}
+          className={`${styles.answerInput} ${answered ? (isCorrect ? styles.correct : styles.incorrect) : ''}`}
           disabled={answered}
           autoFocus
         />
@@ -24,7 +25,7 @@ const InputQuiz = ({ currentCharacter, answered, isCorrect, userAnswer, setUserA
         {!answered && (
           <button 
             type="submit" 
-            className="submit-btn" 
+            className={sharedStyles.submitBtn}
             disabled={!userAnswer.trim()}
           >
             답안 제출
@@ -32,16 +33,16 @@ const InputQuiz = ({ currentCharacter, answered, isCorrect, userAnswer, setUserA
         )}
         
         {answered && (
-          <div className="result">
-            <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
+          <div className={sharedStyles.result}>
+            <div className={`${sharedStyles.resultMessage} ${isCorrect ? sharedStyles.correct : sharedStyles.incorrect}`}>
               {isCorrect ? (
                 <>
-                  <span className="result-icon">✅</span>
+                  <span className={sharedStyles.resultIcon}>✅</span>
                   <span>정답입니다!</span>
                 </>
               ) : (
                 <>
-                  <span className="result-icon">❌</span>
+                  <span className={sharedStyles.resultIcon}>❌</span>
                   <span>
                     틀렸습니다. 정답: {currentCharacter.romaji}
                   </span>
@@ -49,7 +50,7 @@ const InputQuiz = ({ currentCharacter, answered, isCorrect, userAnswer, setUserA
               )}
             </div>
             <button 
-              className="next-btn" 
+              className={sharedStyles.nextBtn}
               onClick={handleNext}
             >
               다음 문제

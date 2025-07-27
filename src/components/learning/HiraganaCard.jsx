@@ -1,13 +1,13 @@
 import React from 'react';
-import '../../styles/components/HiraganaCard.css';
+import styles from './HiraganaCard.module.css';
 
 const HiraganaCard = ({ hiragana, romaji, image, description }) => {
   return (
-    <div className="hiragana-card">
-      <div className="hiragana-char">{hiragana}</div>
-      <div className="romaji">{romaji}</div>
-      {image && <img src={image} alt={hiragana} className="hiragana-image" />}
-      {description && <p className="hiragana-description">{description}</p>}
+    <div className={styles.hiraganaCard}>
+      <div className={styles.hiraganaChar}>{hiragana}</div>
+      <div className={styles.romaji}>{romaji}</div>
+      {image && <img src={image} alt={hiragana} className={styles.hiraganaImage} />}
+      {description && <p className={styles.hiraganaDescription}>{description}</p>}
     </div>
   );
 };

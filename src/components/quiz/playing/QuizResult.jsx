@@ -1,5 +1,6 @@
 import React from 'react';
-import '../../../styles/components/Quiz.css';
+import styles from './QuizResult.module.css';
+import sharedStyles from './shared.module.css';
 
 const QuizResult = ({ 
   score, 
@@ -31,25 +32,25 @@ const QuizResult = ({
   };
 
   return (
-    <div className="quiz-complete">
-      <div className="result-card">
+    <div className={styles.quizComplete}>
+      <div className={styles.resultCard}>
         <h2>퀴즈 완료! {getScoreEmoji()}</h2>
-        <div className="final-score">
-          <div className="score-number">{score}/{totalQuestions}</div>
-          <div className="score-percentage">({getScorePercentage()}%)</div>
+        <div className={styles.finalScore}>
+          <div className={styles.scoreNumber}>{score}/{totalQuestions}</div>
+          <div className={styles.scorePercentage}>({getScorePercentage()}%)</div>
         </div>
-        <div className="result-message">
+        <div className={styles.resultMessage}>
           {getResultMessage()}
         </div>
-        <div className="quiz-actions">
+        <div className={styles.quizActions}>
           <button 
             ref={restartButtonRef}
-            className="restart-btn" 
+            className={styles.restartBtn}
             onClick={onRestart}
           >
             다시 도전하기
           </button>
-          <button className="back-btn" onClick={onBackToSelector}>
+          <button className={sharedStyles.backBtn} onClick={onBackToSelector}>
             히라가나 선택으로 돌아가기
           </button>
         </div>

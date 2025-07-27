@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../styles/components/HiraganaSelector.css';
+import styles from './HiraganaTable.module.css';
 
 const HiraganaTable = ({ 
   selectedCharacters, 
@@ -12,11 +12,11 @@ const HiraganaTable = ({
   toggleAll 
 }) => {
   return (
-    <div className="hiragana-table">
+    <div className={styles.hiraganaTable}>
       {/* 열 헤더 */}
-      <div className="table-header">
+      <div className={styles.tableHeader}>
         <button 
-          className="select-all-btn"
+          className={styles.selectAllBtn}
           onClick={toggleAll}
           title="전체 선택/해제"
         >
@@ -25,7 +25,7 @@ const HiraganaTable = ({
         {currentColumns.map((col, colIndex) => (
           <button
             key={col}
-            className="column-header"
+            className={styles.columnHeader}
             onClick={() => toggleColumn(colIndex)}
             title={`${col}단 전체 선택/해제`}
           >
@@ -36,28 +36,28 @@ const HiraganaTable = ({
 
       {/* 각 행 */}
       {currentData.map((rowData, rowIndex) => (
-        <div key={rowData.row} className="table-row">
+        <div key={rowData.row} className={styles.tableRow}>
           <button
-            className="row-header"
+            className={styles.rowHeader}
             onClick={() => toggleRow(rowData)}
             title={`${rowData.row}행 전체 선택/해제`}
           >
             {rowData.row}
           </button>
           {rowData.characters.map((char, charIndex) => (
-            <div key={charIndex} className="character-cell">
+            <div key={charIndex} className={styles.characterCell}>
               {char ? (
                 <button
-                  className={`character-btn ${
-                    selectedCharacters.has(`${char.hiragana}-${char.romaji}`) ? 'selected' : ''
+                  className={`${styles.characterBtn} ${
+                    selectedCharacters.has(`${char.hiragana}-${char.romaji}`) ? styles.selected : ''
                   }`}
                   onClick={() => toggleCharacter(char)}
                 >
-                  <div className="hiragana">{char.hiragana}</div>
-                  <div className="romaji">{char.romaji}</div>
+                  <div className={styles.hiragana}>{char.hiragana}</div>
+                  <div className={styles.romaji}>{char.romaji}</div>
                 </button>
               ) : (
-                <div className="empty-cell"></div>
+                <div className={styles.emptyCell}></div>
               )}
             </div>
           ))}
