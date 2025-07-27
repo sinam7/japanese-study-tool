@@ -124,7 +124,7 @@ const useHiraganaSelector = () => {
   }, [selectedCharacters]);
 
   // 전체 선택 상태 확인
-  const isAllSelected = useCallback(() => {
+  const isAllSelected = useMemo(() => {
     const allCharacters = hiraganaData
       .flatMap(row => row.characters)
       .filter(char => char !== null);
@@ -135,7 +135,7 @@ const useHiraganaSelector = () => {
   }, [selectedCharacters]);
 
   // 선택된 문자들을 배열로 변환
-  const getSelectedCharactersArray = useCallback(() => {
+  const selectedCharactersArray = useMemo(() => {
     return Array.from(selectedCharacters).map(key => {
       const [hiragana, romaji] = key.split('-');
       return { hiragana, romaji };
@@ -153,8 +153,8 @@ const useHiraganaSelector = () => {
     currentColumns,
     
     // 계산된 값들
-    isAllSelected: isAllSelected(),
-    selectedCharactersArray: getSelectedCharactersArray(),
+    isAllSelected,
+    selectedCharactersArray,
     
     // 함수들
     toggleCharacter,
