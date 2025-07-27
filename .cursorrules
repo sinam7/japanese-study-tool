@@ -1,0 +1,174 @@
+# 히라가나 학습 퀴즈 프로젝트 - Cursor 규칙
+
+## 📁 프로젝트 구조 패턴
+
+### 컴포넌트 구조
+- 모든 React 컴포넌트는 **CSS Modules** 패턴을 사용해야 합니다
+- 컴포넌트와 스타일 파일은 1:1 대응: `ComponentName.jsx` + `ComponentName.module.css`
+- 컴포넌트 파일은 해당 기능 폴더 내에 위치시킵니다
+
+### 폴더 구조
+```
+src/
+├── components/          # 모든 React 컴포넌트
+│   ├── common/         # 공통 컴포넌트 (Sidebar, Button 등)
+│   ├── learning/       # 학습 관련 컴포넌트
+│   ├── quiz/           # 퀴즈 관련 컴포넌트 (preparation, playing 하위 폴더)
+│   └── settings/       # 설정 관련 컴포넌트
+├── config/             # 모든 설정 파일 (routes, constants, variables.css)
+├── data/               # 정적 데이터
+├── hooks/              # 커스텀 React 훅
+└── utils/              # 유틸리티 함수
+```
+
+## 🎨 CSS 및 스타일링 규칙
+
+### CSS Modules 필수 사용
+- **모든 컴포넌트는 CSS Modules만 사용**
+- Global CSS는 사용하지 않음 (variables.css 제외)
+- Import 패턴: `import styles from './ComponentName.module.css';`
+
+### 클래스명 규칙
+- CSS 파일에서: kebab-case → `.quiz-header`, `.submit-btn`
+- JSX에서: camelCase → `{styles.quizHeader}`, `{styles.submitBtn}`
+- BEM 방법론은 사용하지 않음 (CSS Modules가 네임스페이스 제공)
+
+### 스타일 변수
+- 모든 CSS 변수는 `src/config/variables.css`에 정의
+- Import 패턴: `@import '../../../config/variables.css';` (경로는 상대적으로)
+- 색상 변수: `--color-primary`, `--color-success`, `--color-danger`
+- 그라디언트: `--gradient-primary`, `--gradient-accent`
+
+## ⚛️ React 컴포넌트 규칙
+
+### 컴포넌트 패턴
+- **함수형 컴포넌트만 사용** (클래스 컴포넌트 금지)
+- 컴포넌트명은 PascalCase: `QuizPreparation`, `HiraganaTable`
+- 파일명도 컴포넌트명과 동일: `QuizPreparation.jsx`
+
+### Import 순서
+```javascript
+// 1. React 관련
+import React, { useState, useEffect } from 'react';
+
+// 2. 외부 라이브러리
+import { Routes, Route } from 'react-router-dom';
+
+// 3. 내부 컴포넌트 (상대 경로)
+import QuizSettings from './QuizSettings';
+
+// 4. 훅과 유틸리티
+import useQuiz from '../../hooks/useQuiz';
+
+// 5. CSS Modules (항상 마지막)
+import styles from './ComponentName.module.css';
+```
+
+### 훅 사용 규칙
+- 커스텀 훅은 `src/hooks/` 폴더에 위치
+- 훅 이름은 `use`로 시작: `useQuiz`, `useHiraganaSelector`
+- 복잡한 상태 로직은 훅으로 분리하여 재사용성 확보
+
+## 📝 코딩 컨벤션
+
+### 언어
+- **UI 텍스트와 주석은 한국어 사용**
+- 변수명과 함수명은 영어 사용
+- 커밋 메시지는 한국어 사용
+
+### 명명 규칙
+- 변수/함수: camelCase → `selectedCharacters`, `handleSubmit`
+- 컴포넌트: PascalCase → `QuizPlaying`, `HiraganaCard`
+- 상수: UPPER_SNAKE_CASE → `DEFAULT_VALUES`
+- CSS 클래스: camelCase (CSS Modules) → `quizHeader`, `submitBtn`
+
+### 이벤트 핸들러
+- `handle` 접두사 사용: `handleSubmit`, `handleNext`, `handleToggle`
+- prop으로 전달되는 콜백: `on` 접두사 → `onStartQuiz`, `onBackToSelector`
+
+## 🏗️ 아키텍처 규칙
+
+### 상태 관리
+- 로컬 상태: `useState` 사용
+- 복잡한 로직: 커스텀 훅으로 분리
+- 상태 끌어올리기(Lifting State Up) 패턴 활용
+
+### 컴포넌트 분리
+- 단일 책임 원칙 준수
+- 큰 컴포넌트는 하위 컴포넌트로 분리
+- 예: `QuizPlaying` → `QuizProgress`, `InputQuiz`, `ChoiceQuiz`
+
+### 설정 관리
+- 모든 앱 설정은 `src/config/`에 중앙화
+- 라우트 설정: `routes.js`
+- 상수: `constants.js`
+- 스타일 변수: `variables.css`
+
+## 🧪 컴포넌트 생성 템플릿
+
+### 새 컴포넌트 생성 시 따를 패턴:
+
+```javascript
+// ComponentName.jsx
+import React from 'react';
+import styles from './ComponentName.module.css';
+
+const ComponentName = ({ prop1, prop2 }) => {
+  return (
+    <div className={styles.container}>
+      <h2 className={styles.title}>제목</h2>
+      {/* 컴포넌트 내용 */}
+    </div>
+  );
+};
+
+export default ComponentName;
+```
+
+```css
+/* ComponentName.module.css */
+@import '../../config/variables.css'; /* 경로는 실제 위치에 맞게 조정 */
+
+.container {
+  /* 스타일 정의 */
+}
+
+.title {
+  color: var(--color-text-primary);
+  font-size: 1.2rem;
+}
+```
+
+## 🚫 금지 사항
+
+- Global CSS 파일 생성 금지 (`variables.css` 제외)
+- 인라인 스타일 사용 금지
+- 클래스 컴포넌트 사용 금지
+- CSS-in-JS 라이브러리 사용 금지 (styled-components 등)
+- BEM 방법론 사용 금지 (CSS Modules가 대체)
+
+## ✅ 모범 사례
+
+### 스타일 공유
+- 공통 스타일이 필요한 경우 `shared.module.css` 패턴 사용
+- 예: `src/components/quiz/playing/shared.module.css`
+
+### 반응형 디자인
+- 모바일 퍼스트 접근
+- CSS 변수와 미디어 쿼리 활용
+- `@media (max-width: 768px)` 기준점 사용
+
+### 접근성
+- semantic HTML 태그 사용
+- 적절한 aria 속성 추가
+- 키보드 네비게이션 지원
+
+## 🔄 리팩토링 가이드
+
+### 기존 컴포넌트 수정 시
+1. CSS Modules 패턴 확인
+2. 컴포넌트 크기가 클 경우 분리 검토
+3. 중복 로직은 커스텀 훅으로 추출
+4. 스타일 변수 활용도 확인
+
+이 규칙들을 따라 일관되고 유지보수 가능한 코드를 작성하세요. 
