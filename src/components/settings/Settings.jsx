@@ -1,36 +1,36 @@
 import React from 'react';
-import { routeConfig } from './routeConfig';
-import './Settings.css';
+import { routeConfig } from '../../config/routes';
+import styles from './Settings.module.css';
 
 const Settings = () => {
   return (
-    <div className="settings-container">
-      <h2 className="settings-title">
+    <div className={styles.settingsContainer}>
+      <h2 className={styles.settingsTitle}>
         앱 설정
       </h2>
       
-      <div className="settings-section">
-        <h3 className="settings-section-title">
+      <div className={styles.settingsSection}>
+        <h3 className={styles.settingsSectionTitle}>
           페이지 관리
         </h3>
         
-        <div className="route-grid">
+        <div className={styles.routeGrid}>
           {Object.entries(routeConfig).map(([path, config]) => (
-            <div key={path} className="route-item">
-              <div className="route-header">
-                <span className="route-name">
+            <div key={path} className={styles.routeItem}>
+              <div className={styles.routeHeader}>
+                <span className={styles.routeName}>
                   {config.name}
                 </span>
-                <span className={`route-status ${config.showLayoutToggle ? 'supported' : 'not-supported'}`}>
-                  {config.showLayoutToggle ? '가로모드 지원' : '가로모드 미지원'}
+                <span className={`${styles.routeStatus} ${styles.routeStatusResponsive}`}>
+                  반응형 레이아웃
                 </span>
               </div>
               
-              <div className="route-path">
-                경로: <code className="code-snippet">{path}</code>
+              <div className={styles.routePath}>
+                경로: <code className={styles.codeSnippet}>{path}</code>
               </div>
               
-              <div className="route-description">
+              <div className={styles.routeDescription}>
                 {config.description}
               </div>
             </div>
@@ -38,12 +38,12 @@ const Settings = () => {
         </div>
       </div>
       
-      <div className="settings-section">
-        <h3 className="settings-section-title">
+      <div className={styles.settingsSection}>
+        <h3 className={styles.settingsSectionTitle}>
           개발자 정보
         </h3>
-        <p className="developer-info">
-          새로운 페이지를 추가하려면 <code className="code-snippet">src/components/settings/routeConfig.js</code>에서 라우트 설정을 관리할 수 있습니다.
+        <p className={styles.developerInfo}>
+          새로운 페이지를 추가하려면 <code className={styles.codeSnippet}>src/config/routes.js</code>에서 라우트 설정을 관리할 수 있습니다.
         </p>
       </div>
     </div>

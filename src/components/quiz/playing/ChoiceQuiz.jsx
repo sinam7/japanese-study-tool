@@ -1,29 +1,30 @@
 import React from 'react';
-import '../../styles/components/Quiz.css';
+import styles from './ChoiceQuiz.module.css';
+import sharedStyles from './shared.module.css';
 
 const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedChoice, setSelectedChoice, handleSubmit, handleNext, autoSubmit, setAutoSubmit }) => {
   return (
     <>
-      <div className="question">
+      <div className={sharedStyles.question}>
         <h2>이 로마자의 히라가나는?</h2>
-        <div className="romaji-display">{currentCharacter.romaji}</div>
+        <div className={styles.romajiDisplay}>{currentCharacter.romaji}</div>
       </div>
 
-      <form onSubmit={handleSubmit} className="answer-form">
-        <div className="choices-container">
+      <form onSubmit={handleSubmit} className={sharedStyles.answerForm}>
+        <div className={styles.choicesContainer}>
           {choices.map((choice, index) => (
             <button
               key={choice.hiragana}
               type="button"
-              className={`choice-btn ${
-                selectedChoice === choice ? 'selected' : ''
+              className={`${styles.choiceBtn} ${
+                selectedChoice === choice ? styles.selected : ''
               } ${
                 answered 
                   ? choice.hiragana === currentCharacter.hiragana 
-                    ? 'correct' 
+                    ? styles.correct 
                     : selectedChoice === choice 
-                      ? 'incorrect' 
-                      : 'disabled'
+                      ? styles.incorrect 
+                      : styles.disabled
                   : ''
               }`}
               onClick={() => setSelectedChoice(choice)}
@@ -37,7 +38,7 @@ const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedCh
         {!answered && !autoSubmit && (
           <button 
             type="submit" 
-            className="submit-btn" 
+            className={sharedStyles.submitBtn}
             disabled={selectedChoice === null}
           >
             답안 제출
@@ -45,16 +46,16 @@ const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedCh
         )}
         
         {answered && (
-          <div className="result">
-            <div className={`result-message ${isCorrect ? 'correct' : 'incorrect'}`}>
+          <div className={sharedStyles.result}>
+            <div className={`${sharedStyles.resultMessage} ${isCorrect ? sharedStyles.correct : sharedStyles.incorrect}`}>
               {isCorrect ? (
                 <>
-                  <span className="result-icon">✅</span>
+                  <span className={sharedStyles.resultIcon}>✅</span>
                   <span>정답입니다!</span>
                 </>
               ) : (
                 <>
-                  <span className="result-icon">❌</span>
+                  <span className={sharedStyles.resultIcon}>❌</span>
                   <span>
                     틀렸습니다. 정답: {currentCharacter.hiragana}
                   </span>
@@ -62,7 +63,7 @@ const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedCh
               )}
             </div>
             <button 
-              className="next-btn" 
+              className={sharedStyles.nextBtn}
               onClick={handleNext}
             >
               다음 문제
@@ -71,16 +72,16 @@ const ChoiceQuiz = ({ currentCharacter, answered, isCorrect, choices, selectedCh
         )}
       </form>
 
-      <div className="quiz-toggle-container">
-        <label className="quiz-toggle-label">
+      <div className={styles.quizToggleContainer}>
+        <label className={styles.quizToggleLabel}>
           <input
             type="checkbox"
             checked={autoSubmit}
             onChange={(e) => setAutoSubmit(e.target.checked)}
-            className="quiz-toggle-checkbox"
+            className={styles.quizToggleCheckbox}
           />
-          <span className="quiz-toggle-switch"></span>
-          <span className="quiz-toggle-text">즉시 제출</span>
+          <span className={styles.quizToggleSwitch}></span>
+          <span className={styles.quizToggleText}>즉시 제출</span>
         </label>
       </div>
     </>

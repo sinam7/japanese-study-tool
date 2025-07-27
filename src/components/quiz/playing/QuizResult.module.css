@@ -1,0 +1,131 @@
+@import '../../../config/variables.css';
+
+.quizComplete {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.resultCard {
+  background: var(--color-surface-1);
+  border-radius: 24px;
+  padding: 3rem 2rem;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--color-border-medium);
+  box-shadow: 0 10px 40px var(--color-black-20);
+  max-width: 500px;
+  width: 100%;
+  animation: slideUp 0.6s ease-out;
+}
+
+.resultCard h2 {
+  color: var(--color-text-primary);
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  text-shadow: none;
+}
+
+.finalScore {
+  margin-bottom: 2rem;
+}
+
+.scoreNumber {
+  font-size: 4rem;
+  font-weight: 700;
+  background: var(--gradient-success);
+  -webkit-background-clip: text;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.scorePercentage {
+  font-size: 1.5rem;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+}
+
+.resultMessage {
+  font-size: 1.3rem;
+  color: var(--color-text-primary);
+  margin-bottom: 3rem;
+  padding: 1rem;
+  background: var(--color-surface-2);
+  border-radius: 12px;
+  border: 1px solid var(--color-border-medium);
+}
+
+.quizActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.restartBtn {
+  background: var(--gradient-accent);
+  color: var(--color-white);
+  border: none;
+  padding: 1.2rem 2.5rem;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px var(--color-success-bg-30);
+  min-width: 200px;
+}
+
+.restartBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px var(--color-success-bg-40);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .quizComplete {
+    min-height: 60vh;
+    padding: 1rem;
+  }
+  
+  .resultCard {
+    padding: 2rem 1.5rem;
+  }
+  
+  .resultCard h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .scoreNumber {
+    font-size: 3rem;
+  }
+  
+  .scorePercentage {
+    font-size: 1.2rem;
+  }
+  
+  .resultMessage {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .restartBtn {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    min-width: 180px;
+  }
+} 
