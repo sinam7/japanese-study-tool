@@ -29,7 +29,7 @@ src/
 - Import 패턴: `import styles from './ComponentName.module.css';`
 
 ### 클래스명 규칙
-- CSS 파일에서: kebab-case → `.quiz-header`, `.submit-btn`
+- CSS 파일에서: camelCase → `.quizHeader`, `.submitBtn`
 - JSX에서: camelCase → `{styles.quizHeader}`, `{styles.submitBtn}`
 - BEM 방법론은 사용하지 않음 (CSS Modules가 네임스페이스 제공)
 

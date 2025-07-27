@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import { hiraganaData, columns } from '../data/hiraganaData';
 
 const useHiraganaSelector = () => {
@@ -24,8 +24,8 @@ const useHiraganaSelector = () => {
   }, []);
 
   // 화면 크기에 따른 반응형 데이터
-  const currentData = isWideScreen ? getTransposedData() : hiraganaData;
-  const currentColumns = isWideScreen ? hiraganaData.map(row => row.row) : columns;
+  const currentData = useMemo(() => isWideScreen ? getTransposedData() : hiraganaData, [isWideScreen, getTransposedData]);
+  const currentColumns = useMemo(() => isWideScreen ? hiraganaData.map(row => row.row) : columns, [isWideScreen]);
 
   // quizType을 sessionStorage에 저장
   useEffect(() => {
