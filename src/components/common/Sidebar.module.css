@@ -1,5 +1,7 @@
+@import '../../config/variables.css';
+
 /* 사이드바 오버레이 */
-.sidebar-overlay {
+.sidebarOverlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -30,12 +32,12 @@
   box-shadow: 4px 0 20px rgba(232, 165, 192, 0.2);
 }
 
-.sidebar-open {
+.sidebarOpen {
   left: 0;
 }
 
 /* 사이드바 헤더 - 벚꽃 그라디언트 */
-.sidebar-header {
+.sidebarHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,7 +47,7 @@
   color: var(--color-text-primary);
 }
 
-.sidebar-header h3 {
+.sidebarHeader h3 {
   margin: 0;
   font-size: 1.3rem;
   font-weight: 700;
@@ -53,7 +55,7 @@
   text-shadow: 1px 1px 2px var(--color-white-80);
 }
 
-.sidebar-close {
+.sidebarClose {
   background: var(--color-white-90);
   border: 2px solid var(--color-primary);
   color: var(--color-text-primary);
@@ -67,7 +69,7 @@
   justify-content: center;
 }
 
-.sidebar-close:hover {
+.sidebarClose:hover {
   background: var(--color-primary);
   color: var(--color-white);
   transform: scale(1.1);
@@ -75,24 +77,24 @@
 }
 
 /* 사이드바 메뉴 - 벚꽃 테마 */
-.sidebar-menu {
+.sidebarMenu {
   list-style: none;
   padding: 0;
   margin: 0.5rem 0;
 }
 
-.sidebar-menu li {
+.sidebarMenu li {
   margin: 0.25rem 0.75rem;
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
-.sidebar-menu li:hover {
+.sidebarMenu li:hover {
   transform: translateX(4px);
 }
 
-.sidebar-menu li button {
+.sidebarMenu li button {
   width: 100%;
   background: var(--color-white);
   border: 2px solid var(--color-primary-light);
@@ -109,7 +111,7 @@
   border-radius: 10px;
 }
 
-.sidebar-menu li button:hover {
+.sidebarMenu li button:hover {
   background: var(--gradient-primary);
   border-color: var(--color-primary);
   color: var(--color-text-primary);
@@ -117,7 +119,7 @@
   transform: translateY(-2px);
 }
 
-.sidebar-menu li.active button {
+.menuItemActive button {
   background: var(--gradient-primary);
   border-color: var(--color-primary-dark);
   color: var(--color-text-primary);
@@ -125,14 +127,14 @@
   box-shadow: 0 4px 15px var(--color-primary-light);
 }
 
-.sidebar-menu .menu-icon {
+.menuIcon {
   font-size: 1.3rem;
   width: 1.5rem;
   text-align: center;
   filter: drop-shadow(1px 1px 2px var(--color-white-80));
 }
 
-.sidebar-menu .menu-text {
+.menuText {
   flex: 1;
   text-shadow: 1px 1px 2px var(--color-white-80);
 }
@@ -144,11 +146,11 @@
     left: -250px;
   }
   
-  .sidebar-menu li {
+  .sidebarMenu li {
     margin: 0.2rem 0.5rem;
   }
   
-  .sidebar-menu li button {
+  .sidebarMenu li button {
     padding: 0.8rem 1rem;
     font-size: 0.9rem;
   }

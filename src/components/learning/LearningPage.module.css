@@ -1,11 +1,11 @@
-@import '../variables.css';
+@import '../../config/variables.css';
 
-.learning-page {
+.learningPage {
   padding: 20px;
   text-align: center;
 }
 
-.learning-page h2 {
+.learningPageTitle {
   color: var(--color-text-primary);
   margin-bottom: 30px;
   background-color: var(--color-bg-soft);
@@ -13,9 +13,9 @@
   border-radius: 5px;
 }
 
-.hiragana-cards-container {
+.hiraganaCardsContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-}
+} 
