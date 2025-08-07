@@ -105,10 +105,24 @@
   --gradient-blue-purple: linear-gradient(135deg, #8a2be2, #9370db);
   --gradient-red-pink: linear-gradient(135deg, #e74c3c, #ec7063);
   
+    /* 피드백 색상 - 정답/오답 */
+  --color-feedback-correct-bg: linear-gradient(135deg, #d4f6d4, #b8e6b8);
+  --color-feedback-correct-text: #2d5a2d;
+  --color-feedback-correct-border: #4caf50;
+  --color-feedback-correct-shadow: rgba(76, 175, 80, 0.3);
+  
+  --color-feedback-incorrect-bg: linear-gradient(135deg, #ffd4d4, #ffb8b8);
+  --color-feedback-incorrect-text: #8b2635;
+  --color-feedback-incorrect-border: #f44336;
+  --color-feedback-incorrect-shadow: rgba(244, 67, 54, 0.3);
+
+  /* Primary 색상 투명도 변형 */
+  --color-primary-focus-shadow: rgba(59, 130, 246, 0.1);
+
   /* 그림자 효과 */
   --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
   --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
-  
+
   /* 폰트 */
   --font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif;
 } 

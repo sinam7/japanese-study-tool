@@ -89,7 +89,7 @@ const SentenceQuiz = () => {
     setWasCorrect(isCorrect);
     
     if (isCorrect) {
-      setScore(score + 1);
+      setScore(prevScore => prevScore + 1);
       setFeedback('정답입니다! 🎉');
     } else {
       setFeedback(`틀렸습니다. 정답: ${currentQuiz.romaji}`);

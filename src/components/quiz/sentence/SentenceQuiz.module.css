@@ -60,7 +60,7 @@
 .sentenceInput:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 0 3px var(--color-primary-focus-shadow);
 }
 
 .startButton {
@@ -210,7 +210,7 @@
 .answerInput:focus {
   outline: none;
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 4px rgba(232, 165, 192, 0.3);
+  box-shadow: 0 0 0 4px var(--color-primary-light);
   transform: scale(1.02);
   transition: all 0.2s ease;
 }
@@ -252,18 +252,18 @@
 }
 
 .feedback.correct {
-  background: linear-gradient(135deg, #d4f6d4, #b8e6b8);
-  color: #2d5a2d;
-  border: 2px solid #4caf50;
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+  background: var(--color-feedback-correct-bg);
+  color: var(--color-feedback-correct-text);
+  border: 2px solid var(--color-feedback-correct-border);
+  box-shadow: 0 4px 12px var(--color-feedback-correct-shadow);
   animation: successPulse 0.6s ease-in-out;
 }
 
 .feedback.incorrect {
-  background: linear-gradient(135deg, #ffd4d4, #ffb8b8);
-  color: #8b2635;
-  border: 2px solid #f44336;
-  box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+  background: var(--color-feedback-incorrect-bg);
+  color: var(--color-feedback-incorrect-text);
+  border: 2px solid var(--color-feedback-incorrect-border);
+  box-shadow: 0 4px 12px var(--color-feedback-incorrect-shadow);
   animation: errorShake 0.6s ease-in-out;
 }
 

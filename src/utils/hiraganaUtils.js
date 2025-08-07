@@ -51,6 +51,25 @@ const hiraganaMap = (() => {
 // 캐시된 히라가나 맵 반환
 export const getAllHiraganaMap = () => hiraganaMap;
 
+// 정적 패턴 배열들 - 모듈 레벨에서 한 번만 생성
+const youonPatterns = [
+  'きゃ', 'きゅ', 'きょ',
+  'しゃ', 'しゅ', 'しょ',
+  'ちゃ', 'ちゅ', 'ちょ',
+  'にゃ', 'にゅ', 'にょ',
+  'ひゃ', 'ひゅ', 'ひょ',
+  'みゃ', 'みゅ', 'みょ',
+  'りゃ', 'りゅ', 'りょ',
+  'ぎゃ', 'ぎゅ', 'ぎょ',
+  'じゃ', 'じゅ', 'じょ',
+  'びゃ', 'びゅ', 'びょ',
+  'ぴゃ', 'ぴゅ', 'ぴょ'
+];
+
+const dakutenPatterns = ['が', 'ぎ', 'ぐ', 'げ', 'ご', 'ざ', 'じ', 'ず', 'ぜ', 'ぞ', 'だ', 'ぢ', 'づ', 'で', 'ど', 'ば', 'び', 'ぶ', 'べ', 'ぼ'];
+
+const handakutenPatterns = ['ぱ', 'ぴ', 'ぷ', 'ぺ', 'ぽ'];
+
 // 히라가나 문자인지 확인하는 함수
 export const isHiragana = (char) => {
   return hiraganaMap.hasOwnProperty(char);
@@ -116,30 +135,15 @@ export const checkAnswer = (userAnswer, correctAnswer) => {
 
 // 요음 패턴 확인
 export const isYouon = (hiragana) => {
-  const youonPatterns = [
-    'きゃ', 'きゅ', 'きょ',
-    'しゃ', 'しゅ', 'しょ',
-    'ちゃ', 'ちゅ', 'ちょ',
-    'にゃ', 'にゅ', 'にょ',
-    'ひゃ', 'ひゅ', 'ひょ',
-    'みゃ', 'みゅ', 'みょ',
-    'りゃ', 'りゅ', 'りょ',
-    'ぎゃ', 'ぎゅ', 'ぎょ',
-    'じゃ', 'じゅ', 'じょ',
-    'びゃ', 'びゅ', 'びょ',
-    'ぴゃ', 'ぴゅ', 'ぴょ'
-  ];
   return youonPatterns.includes(hiragana);
 };
 
 // 탁음 패턴 확인
 export const isDakuten = (hiragana) => {
-  const dakutenPatterns = ['が', 'ぎ', 'ぐ', 'げ', 'ご', 'ざ', 'じ', 'ず', 'ぜ', 'ぞ', 'だ', 'ぢ', 'づ', 'で', 'ど', 'ば', 'び', 'ぶ', 'べ', 'ぼ'];
   return dakutenPatterns.includes(hiragana);
 };
 
 // 반탁음 패턴 확인
 export const isHandakuten = (hiragana) => {
-  const handakutenPatterns = ['ぱ', 'ぴ', 'ぷ', 'ぺ', 'ぽ'];
   return handakutenPatterns.includes(hiragana);
 }; 
