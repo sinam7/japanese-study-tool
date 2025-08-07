@@ -4,7 +4,7 @@ import CategoryTabs from './CategoryTabs';
 import CategoryInfo from './CategoryInfo';
 import HiraganaTable from './HiraganaTable';
 
-import { hiraganaCategories } from '../../../data/extendedHiraganaData';
+import { hiraganaCategories } from './extendedHiraganaData';
 import styles from './ExtendedHiraganaTable.module.css';
 
 const ExtendedHiraganaTable = ({ 

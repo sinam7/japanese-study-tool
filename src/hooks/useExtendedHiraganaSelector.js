@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import { hiraganaCategories, columns } from '../data/extendedHiraganaData';
+import { hiraganaCategories, columns } from '../components/quiz/preparation/hiragana-table/extendedHiraganaData';
 
 const useExtendedHiraganaSelector = (selectedCharacters) => {
   // sessionStorage에서 퀴즈 타입 불러오기

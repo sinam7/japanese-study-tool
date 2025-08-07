@@ -1,4 +1,4 @@
-@import '../../../config/variables.css';
+@import '../../../../config/variables.css';
 
 .selectedCharacters {
   background: var(--color-surface-1);

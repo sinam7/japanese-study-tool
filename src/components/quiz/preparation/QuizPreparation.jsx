@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ExtendedHiraganaTable from './ExtendedHiraganaTable';
-import QuizSettings from './QuizSettings';
-import SelectedCharactersList from './SelectedCharactersList';
-import { HiraganaProvider } from '../../../contexts/HiraganaContext';
+import ExtendedHiraganaTable from './hiragana-table/ExtendedHiraganaTable';
+import QuizSettings from './components/QuizSettings';
+import SelectedCharactersList from './components/SelectedCharactersList';
+import { HiraganaProvider } from '../../../contexts/HiraganaContext.jsx';
 import useHiraganaSelection from '../../../hooks/useHiraganaSelection';
 import useExtendedHiraganaSelector from '../../../hooks/useExtendedHiraganaSelector';
 

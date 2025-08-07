@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHiraganaContext } from '../../../contexts/HiraganaContext';
+import { useHiraganaContext } from '../../../../contexts/HiraganaContext.jsx';
 import styles from './HiraganaTable.module.css';
 
 const HiraganaTable = ({ 

@@ -1,6 +1,6 @@
 import React from 'react';
-import { hiraganaCategories } from '../../../data/extendedHiraganaData';
-import { useHiraganaContext } from '../../../contexts/HiraganaContext';
+import { hiraganaCategories } from './extendedHiraganaData';
+import { useHiraganaContext } from '../../../../contexts/HiraganaContext.jsx';
 import styles from './CategoryTabs.module.css';
 
 const CategoryTabs = ({ activeCategory, onCategoryChange }) => {

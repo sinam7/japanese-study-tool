@@ -1,4 +1,4 @@
-@import '../../../config/variables.css';
+@import '../../../../config/variables.css';
 
 .hiraganaTable {
   background: var(--color-surface-1);
