@@ -1,31 +1,30 @@
 import React from 'react';
-import HiraganaTable from './HiraganaTable';
+import ExtendedHiraganaTable from './ExtendedHiraganaTable';
 import QuizSettings from './QuizSettings';
 import SelectedCharactersList from './SelectedCharactersList';
-import useHiraganaSelector from '../../../hooks/useHiraganaSelector';
+import useExtendedHiraganaSelector from '../../../hooks/useExtendedHiraganaSelector';
 import styles from './QuizPreparation.module.css';
 
 const QuizPreparation = ({ onStartQuiz }) => {
   const {
     // 상태들
     selectedCharacters,
+    selectedCharactersList,
+    selectedCount,
     quizType,
     setQuizType,
     choiceCount,
     setChoiceCount,
-    currentData,
-    currentColumns,
-    
-    // 계산된 값들
-    isAllSelected,
-    selectedCharactersArray,
     
     // 함수들
     toggleCharacter,
     toggleRow,
     toggleColumn,
     toggleAll,
-  } = useHiraganaSelector();
+    isAllSelected,
+    getResponsiveData,
+    getResponsiveColumns,
+  } = useExtendedHiraganaSelector();
 
   const handleStartQuiz = () => {
     const settings = {
@@ -33,20 +32,20 @@ const QuizPreparation = ({ onStartQuiz }) => {
       choiceCount: choiceCount,
       autoSubmit: true // 기본값을 true로 설정
     };
-    onStartQuiz(selectedCharactersArray, settings);
+    onStartQuiz(selectedCharactersList, settings);
   };
 
   return (
     <div className={styles.hiraganaSelector}>
-      <HiraganaTable
+      <ExtendedHiraganaTable
         selectedCharacters={selectedCharacters}
-        currentData={currentData}
-        currentColumns={currentColumns}
         isAllSelected={isAllSelected}
         toggleCharacter={toggleCharacter}
         toggleRow={toggleRow}
         toggleColumn={toggleColumn}
         toggleAll={toggleAll}
+        getResponsiveData={getResponsiveData}
+        getResponsiveColumns={getResponsiveColumns}
       />
 
       <div className={styles.bottomSections}>
@@ -59,7 +58,7 @@ const QuizPreparation = ({ onStartQuiz }) => {
 
         <SelectedCharactersList
           selectedCharacters={selectedCharacters}
-          selectedCharactersArray={selectedCharactersArray}
+          selectedCharactersArray={selectedCharactersList}
           onStartQuiz={handleStartQuiz}
         />
       </div>

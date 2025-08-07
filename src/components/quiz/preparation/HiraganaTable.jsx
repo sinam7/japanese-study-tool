@@ -9,7 +9,8 @@ const HiraganaTable = ({
   toggleCharacter,
   toggleRow,
   toggleColumn,
-  toggleAll 
+  toggleAll,
+  currentCategory
 }) => {
   return (
     <div className={styles.hiraganaTable}>
@@ -53,7 +54,9 @@ const HiraganaTable = ({
                   }`}
                   onClick={() => toggleCharacter(char)}
                 >
-                  <div className={styles.hiragana}>{char.hiragana}</div>
+                  <div className={`${styles.hiragana} ${currentCategory === 'youon' ? styles.youonText : ''}`}>
+                    {char.hiragana}
+                  </div>
                   <div className={styles.romaji}>{char.romaji}</div>
                 </button>
               ) : (
