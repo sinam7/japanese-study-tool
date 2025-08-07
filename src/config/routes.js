@@ -21,6 +21,13 @@ export const routeConfig = {
     component: 'LearningPage',
     description: '히라가나 연상 학습을 위한 페이지'
   },
+  '/sentence': {
+    name: '문장 테스트',
+    showInSidebar: true,
+    icon: '📝',
+    component: 'SentenceQuiz',
+    description: '히라가나 문장을 입력하고 테스트하는 페이지'
+  },
   '/settings': {
     name: '설정',
     showInSidebar: false,

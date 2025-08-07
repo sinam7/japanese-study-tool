@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import QuizContainer from './components/quiz/QuizContainer';
 import LearningPage from './components/learning/LearningPage';
+import SentenceQuiz from './components/quiz/sentence/SentenceQuiz';
 import Settings from './components/settings/Settings';
 import Sidebar from './components/common/Sidebar';
 
@@ -38,6 +39,7 @@ function App() {
           <Route path="/" element={<QuizContainer />} />
           <Route path="/quiz" element={<QuizContainer />} />
           <Route path="/learning" element={<LearningPage />} />
+          <Route path="/sentence" element={<SentenceQuiz />} />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </main>
