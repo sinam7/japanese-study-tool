@@ -37,6 +37,16 @@
   --color-border-light: #ddd;
   --color-border-medium: #bbb;
   --color-border-dark: #999;
+  --color-border: #ddd;
+  
+  /* 표면 색상 */
+  --color-surface: #ffffff;
+  
+  /* 회색 팔레트 */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
   
   /* 벚꽃 분홍 - 프라이머리 색상 */
   --color-primary: #e8a5c0;
@@ -45,6 +55,8 @@
   
   /* 벚꽃 연두 - 성공 색상 */
   --color-success: #9bc5a2;
+  --color-success-dark: #7a9a82;
+  --color-success-light: #f0f7f1;
   --color-success-border: #7a9a82;
   --color-success-bg: #f0f7f1;
   --color-green-light-alt: #e5f2e7;
@@ -53,6 +65,9 @@
   
   /* 부드러운 연분홍 - 위험 색상 */
   --color-danger: #e8a5a5;
+  --color-danger-dark: #c58a8a;
+  --color-danger-light: #f7f0f0;
+  --color-danger-lighter: #faf5f5;
   --color-danger-border: #c58a8a;
   --color-danger-bg: #f7f0f0;
   --color-red-light-alt: #f2e5e5;
@@ -89,4 +104,25 @@
   --gradient-green-emerald: linear-gradient(135deg, #2ecc71, #27ae60);
   --gradient-blue-purple: linear-gradient(135deg, #8a2be2, #9370db);
   --gradient-red-pink: linear-gradient(135deg, #e74c3c, #ec7063);
+  
+    /* 피드백 색상 - 정답/오답 */
+  --color-feedback-correct-bg: linear-gradient(135deg, #d4f6d4, #b8e6b8);
+  --color-feedback-correct-text: #2d5a2d;
+  --color-feedback-correct-border: #4caf50;
+  --color-feedback-correct-shadow: rgba(76, 175, 80, 0.3);
+  
+  --color-feedback-incorrect-bg: linear-gradient(135deg, #ffd4d4, #ffb8b8);
+  --color-feedback-incorrect-text: #8b2635;
+  --color-feedback-incorrect-border: #f44336;
+  --color-feedback-incorrect-shadow: rgba(244, 67, 54, 0.3);
+
+  /* Primary 색상 투명도 변형 */
+  --color-primary-focus-shadow: rgba(59, 130, 246, 0.1);
+
+  /* 그림자 효과 */
+  --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+
+  /* 폰트 */
+  --font-family: 'Noto Sans KR', 'Noto Sans JP', sans-serif;
 } 

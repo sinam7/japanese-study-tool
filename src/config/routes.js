@@ -1,7 +1,7 @@
 // 각 경로별 설정 관리
 export const routeConfig = {
   '/': {
-    name: '퀴즈 시작',
+    name: '히라가나 퀴즈',
     showInSidebar: true,
     icon: '🏠',
     component: 'HiraganaSelector',
@@ -16,10 +16,17 @@ export const routeConfig = {
   },
   '/learning': {
     name: '학습',
-    showInSidebar: true,
+    showInSidebar: false,
     icon: '📚',
     component: 'LearningPage',
     description: '히라가나 연상 학습을 위한 페이지'
+  },
+  '/sentence': {
+    name: '문장 테스트',
+    showInSidebar: true,
+    icon: '📝',
+    component: 'SentenceQuiz',
+    description: '히라가나 문장을 입력하고 테스트하는 페이지'
   },
   '/settings': {
     name: '설정',
@@ -34,8 +41,6 @@ export const routeConfig = {
 export const getCurrentRouteConfig = (pathname) => {
   return routeConfig[pathname] || {};
 };
-
-// 가로모드 토글 기능이 제거되었습니다
 
 // 현재 페이지를 제외한 다른 페이지들 가져오기
 export const getOtherRoutes = (currentPath) => {
