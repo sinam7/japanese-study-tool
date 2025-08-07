@@ -1,8 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 import { hiraganaCategories, columns } from '../data/extendedHiraganaData';
 
-const useExtendedHiraganaSelector = () => {
-  const [selectedCharacters, setSelectedCharacters] = useState(new Set());
+const useExtendedHiraganaSelector = (selectedCharacters) => {
   // sessionStorage에서 퀴즈 타입 불러오기
   const [quizType, setQuizType] = useState(() => {
     return sessionStorage.getItem('quiz-type') || 'input';
@@ -68,111 +67,6 @@ const useExtendedHiraganaSelector = () => {
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // 개별 문자 토글
-  const toggleCharacter = useCallback((character) => {
-    const key = `${character.hiragana}-${character.romaji}`;
-    setSelectedCharacters(prev => {
-      const newSet = new Set(prev);
-      if (newSet.has(key)) {
-        newSet.delete(key);
-      } else {
-        newSet.add(key);
-      }
-      return newSet;
-    });
-  }, []);
-
-  // 행 전체 토글 (특정 카테고리 내에서)
-  const toggleRow = useCallback((rowData) => {
-    const rowCharacters = rowData.characters.filter(char => char !== null);
-    const rowKeys = rowCharacters.map(char => `${char.hiragana}-${char.romaji}`);
-    
-    const allSelected = rowKeys.every(key => selectedCharacters.has(key));
-    
-    setSelectedCharacters(prev => {
-      const newSet = new Set(prev);
-      if (allSelected) {
-        rowKeys.forEach(key => newSet.delete(key));
-      } else {
-        rowKeys.forEach(key => newSet.add(key));
-      }
-      return newSet;
-    });
-  }, [selectedCharacters]);
-
-  // 열 전체 토글 (특정 카테고리 내에서)
-  const toggleColumn = useCallback((colIndex, currentData) => {
-    const columnCharacters = currentData
-      .map(row => row.characters[colIndex])
-      .filter(char => char !== null);
-    
-    const columnKeys = columnCharacters.map(char => `${char.hiragana}-${char.romaji}`);
-    const allSelected = columnKeys.every(key => selectedCharacters.has(key));
-    
-    setSelectedCharacters(prev => {
-      const newSet = new Set(prev);
-      if (allSelected) {
-        columnKeys.forEach(key => newSet.delete(key));
-      } else {
-        columnKeys.forEach(key => newSet.add(key));
-      }
-      return newSet;
-    });
-  }, [selectedCharacters]);
-
-  // 전체 선택/해제 (현재 카테고리만)
-  const toggleAll = useCallback((currentData) => {
-    const allCharacters = [];
-    currentData.forEach(row => {
-      row.characters.forEach(char => {
-        if (char) allCharacters.push(char);
-      });
-    });
-    
-    const allKeys = allCharacters.map(char => `${char.hiragana}-${char.romaji}`);
-    const allSelected = allKeys.every(key => selectedCharacters.has(key));
-    
-    setSelectedCharacters(prev => {
-      const newSet = new Set(prev);
-      if (allSelected) {
-        allKeys.forEach(key => newSet.delete(key));
-      } else {
-        allKeys.forEach(key => newSet.add(key));
-      }
-      return newSet;
-    });
-  }, [selectedCharacters]);
-
-  // 전체 카테고리에서 모든 문자 선택/해제
-  const toggleAllCategories = useCallback(() => {
-    const allKeys = allCharactersList.map(char => `${char.hiragana}-${char.romaji}`);
-    const allSelected = allKeys.every(key => selectedCharacters.has(key));
-    
-    setSelectedCharacters(prev => {
-      if (allSelected) {
-        return new Set();
-      } else {
-        return new Set(allKeys);
-      }
-    });
-  }, [allCharactersList, selectedCharacters]);
-
-  // 현재 카테고리의 모든 선택 상태 확인
-  const isAllSelected = useCallback((currentData) => {
-    const allCharacters = [];
-    currentData.forEach(row => {
-      row.characters.forEach(char => {
-        if (char) allCharacters.push(char);
-      });
-    });
-    
-    if (allCharacters.length === 0) return false;
-    
-    return allCharacters.every(char => 
-      selectedCharacters.has(`${char.hiragana}-${char.romaji}`)
-    );
-  }, [selectedCharacters]);
-
   // 선택된 문자들을 실제 문자 객체로 변환
   const selectedCharactersList = useMemo(() => {
     return allCharactersList.filter(char => 
@@ -184,7 +78,6 @@ const useExtendedHiraganaSelector = () => {
   const selectedCount = selectedCharacters.size;
 
   return {
-    selectedCharacters,
     selectedCharactersList,
     selectedCount,
     quizType,
@@ -192,12 +85,6 @@ const useExtendedHiraganaSelector = () => {
     choiceCount,
     setChoiceCount,
     isWideScreen,
-    toggleCharacter,
-    toggleRow,
-    toggleColumn,
-    toggleAll,
-    toggleAllCategories,
-    isAllSelected,
     allCharactersList,
     getResponsiveData,
     getResponsiveColumns
