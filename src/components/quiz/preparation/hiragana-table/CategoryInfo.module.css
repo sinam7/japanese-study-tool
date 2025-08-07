@@ -1,0 +1,41 @@
+@import '../../../../config/variables.css';
+
+/* 카테고리 설명 */
+.categoryDescription {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: var(--color-surface-1);
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+}
+
+.categoryTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.categorySubtext {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .categoryDescription {
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  
+  .categoryTitle {
+    font-size: 1.2rem;
+  }
+  
+  .categorySubtext {
+    font-size: 0.85rem;
+  }
+} 

@@ -1,6 +1,6 @@
 import React from 'react';
 import HiraganaCard from './HiraganaCard';
-import { hiraganaData } from '../../data/hiraganaData';
+import { hiraganaData } from '../quiz/preparation/hiragana-table/extendedHiraganaData';
 import styles from './LearningPage.module.css';
 
 const LearningPage = () => {

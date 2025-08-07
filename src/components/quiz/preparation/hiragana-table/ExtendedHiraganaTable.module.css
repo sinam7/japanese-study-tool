@@ -1,0 +1,7 @@
+@import '../../../../config/variables.css';
+
+.extendedHiraganaTable {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+} 

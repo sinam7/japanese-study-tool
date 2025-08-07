@@ -1,4 +1,4 @@
-import { hiraganaData } from '../data/hiraganaData';
+import { hiraganaData } from '../components/quiz/preparation/hiragana-table/extendedHiraganaData';
 
 export const shuffleArray = (array) => {
   const newArray = [...array];

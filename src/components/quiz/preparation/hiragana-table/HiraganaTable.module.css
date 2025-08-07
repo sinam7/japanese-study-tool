@@ -1,4 +1,4 @@
-@import '../../../config/variables.css';
+@import '../../../../config/variables.css';
 
 .hiraganaTable {
   background: var(--color-surface-1);
@@ -116,6 +116,10 @@
   color: var(--color-white);
 }
 
+.youonText {
+  font-size: 1.3rem;
+}
+
 .romaji {
   font-size: 0.9rem;
   font-weight: 500;
@@ -147,6 +151,10 @@
   
   .hiragana {
     font-size: 1.4rem;
+  }
+  
+  .youonText {
+    font-size: 1.1rem;
   }
   
   .romaji {
