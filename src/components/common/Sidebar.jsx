@@ -4,12 +4,17 @@ import { X } from 'lucide-react';
 import { getSidebarMenuItems } from '../../config/routes';
 import styles from './Sidebar.module.css';
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose, onReset }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleNavigate = (path) => {
-    navigate(path);
+    // 현재 경로와 같은 경로로 이동하는 경우, 컴포넌트를 리셋
+    if (location.pathname === path) {
+      onReset(); // App.jsx의 resetKey를 업데이트하여 컴포넌트 리셋
+    } else {
+      navigate(path);
+    }
     onClose(); // 네비게이션 후 사이드바 닫기
   };
 
