@@ -5,15 +5,15 @@ import {
   youonData 
 } from '../components/quiz/preparation/hiragana-table/extendedHiraganaData';
 
-// 모든 히라가나 문자와 로마자를 매핑하는 맵 생성
-export const getAllHiraganaMap = () => {
-  const hiraganaMap = {};
+// 모든 히라가나 문자와 로마자를 매핑하는 맵을 모듈 레벨에서 한 번만 생성
+const hiraganaMap = (() => {
+  const map = {};
   
   // 기본 50음도 추가
   basicHiraganaData.forEach(row => {
     row.characters.forEach(char => {
       if (char) {
-        hiraganaMap[char.hiragana] = char.romaji;
+        map[char.hiragana] = char.romaji;
       }
     });
   });
@@ -22,7 +22,7 @@ export const getAllHiraganaMap = () => {
   dakutenData.forEach(row => {
     row.characters.forEach(char => {
       if (char) {
-        hiraganaMap[char.hiragana] = char.romaji;
+        map[char.hiragana] = char.romaji;
       }
     });
   });
@@ -31,7 +31,7 @@ export const getAllHiraganaMap = () => {
   handakutenData.forEach(row => {
     row.characters.forEach(char => {
       if (char) {
-        hiraganaMap[char.hiragana] = char.romaji;
+        map[char.hiragana] = char.romaji;
       }
     });
   });
@@ -40,23 +40,24 @@ export const getAllHiraganaMap = () => {
   youonData.forEach(row => {
     row.characters.forEach(char => {
       if (char) {
-        hiraganaMap[char.hiragana] = char.romaji;
+        map[char.hiragana] = char.romaji;
       }
     });
   });
   
-  return hiraganaMap;
-};
+  return Object.freeze(map); // 불변성 보장
+})();
+
+// 캐시된 히라가나 맵 반환
+export const getAllHiraganaMap = () => hiraganaMap;
 
 // 히라가나 문자인지 확인하는 함수
 export const isHiragana = (char) => {
-  const hiraganaMap = getAllHiraganaMap();
   return hiraganaMap.hasOwnProperty(char);
 };
 
 // 문장에서 히라가나 문자들만 추출하는 함수
 export const extractHiraganaFromSentence = (sentence) => {
-  const hiraganaMap = getAllHiraganaMap();
   const characters = [];
   
   for (let i = 0; i < sentence.length; i++) {
@@ -133,7 +134,6 @@ export const isYouon = (hiragana) => {
 
 // 탁음 패턴 확인
 export const isDakuten = (hiragana) => {
-  const dakutenMap = getAllHiraganaMap();
   const dakutenPatterns = ['が', 'ぎ', 'ぐ', 'げ', 'ご', 'ざ', 'じ', 'ず', 'ぜ', 'ぞ', 'だ', 'ぢ', 'づ', 'で', 'ど', 'ば', 'び', 'ぶ', 'べ', 'ぼ'];
   return dakutenPatterns.includes(hiragana);
 };

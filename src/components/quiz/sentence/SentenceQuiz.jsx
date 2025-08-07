@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getAllHiraganaMap } from '../../../utils/hiraganaUtils';
+import { extractHiraganaFromSentence, checkAnswer } from '../../../utils/hiraganaUtils';
 import styles from './SentenceQuiz.module.css';
 
 const SentenceQuiz = () => {
@@ -12,50 +12,25 @@ const SentenceQuiz = () => {
   const [isQuizActive, setIsQuizActive] = useState(false);
   const [showResult, setShowResult] = useState(false);
   const [feedback, setFeedback] = useState('');
+  const [wasCorrect, setWasCorrect] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   
   // 입력란 자동 포커스를 위한 ref
   const answerInputRef = useRef(null);
 
   // 문장에서 히라가나 문자들을 추출하고 퀴즈 생성
   const generateQuizFromSentence = () => {
+    setErrorMessage(''); // 에러 메시지 초기화
+    
     if (!inputSentence.trim()) {
-      alert('히라가나 문장을 입력해주세요!');
+      setErrorMessage('히라가나 문장을 입력해주세요!');
       return;
     }
 
-    const hiraganaMap = getAllHiraganaMap();
-    const characters = [];
-    
-    // 문장을 한 글자씩 분석하여 히라가나인지 확인
-    for (let i = 0; i < inputSentence.length; i++) {
-      const char = inputSentence[i];
-      
-      // 요음 체크 (2글자)
-      if (i < inputSentence.length - 1) {
-        const twoChar = inputSentence.slice(i, i + 2);
-        if (hiraganaMap[twoChar]) {
-          characters.push({
-            hiragana: twoChar,
-            romaji: hiraganaMap[twoChar],
-            position: i
-          });
-          i++; // 다음 글자 건너뛰기
-          continue;
-        }
-      }
-      
-      // 일반 히라가나 체크 (1글자)
-      if (hiraganaMap[char]) {
-        characters.push({
-          hiragana: char,
-          romaji: hiraganaMap[char],
-          position: i
-        });
-      }
-    }
+    const characters = extractHiraganaFromSentence(inputSentence);
 
     if (characters.length === 0) {
-      alert('유효한 히라가나 문자가 없습니다!');
+      setErrorMessage('유효한 히라가나 문자가 없습니다!');
       return;
     }
 
@@ -68,7 +43,9 @@ const SentenceQuiz = () => {
     setIsQuizActive(true);
     setShowResult(false);
     setFeedback('');
+    setWasCorrect(false);
     setUserAnswer('');
+    setErrorMessage('');
     
     // 퀴즈 시작 후 잠깐 뒤에 포커스
     setTimeout(() => {
@@ -84,6 +61,7 @@ const SentenceQuiz = () => {
       setCurrentQuiz(quizCharacters[currentIndex]);
       setUserAnswer('');
       setFeedback('');
+      setWasCorrect(false);
     }
   }, [isQuizActive, quizCharacters, currentIndex]);
 
@@ -103,10 +81,12 @@ const SentenceQuiz = () => {
   const handleSubmitAnswer = () => {
     if (!userAnswer.trim()) {
       setFeedback('답을 입력해주세요!');
+      setWasCorrect(false);
       return;
     }
 
-    const isCorrect = userAnswer.toLowerCase().trim() === currentQuiz.romaji.toLowerCase();
+    const isCorrect = checkAnswer(userAnswer, currentQuiz.romaji);
+    setWasCorrect(isCorrect);
     
     if (isCorrect) {
       setScore(score + 1);
@@ -135,8 +115,10 @@ const SentenceQuiz = () => {
     setScore(0);
     setUserAnswer('');
     setFeedback('');
+    setWasCorrect(false);
     setQuizCharacters([]);
     setCurrentQuiz(null);
+    setErrorMessage('');
   };
 
   // Enter 키로 답안 제출
@@ -176,6 +158,11 @@ const SentenceQuiz = () => {
             >
               테스트 시작하기
             </button>
+            {errorMessage && (
+              <div className={styles.errorMessage}>
+                {errorMessage}
+              </div>
+            )}
           </div>
           
           <div className={styles.exampleSection}>
@@ -245,7 +232,7 @@ const SentenceQuiz = () => {
             </div>
 
             {feedback && (
-              <div className={`${styles.feedback} ${feedback.includes('정답') ? styles.correct : styles.incorrect}`}>
+              <div className={`${styles.feedback} ${wasCorrect ? styles.correct : styles.incorrect}`}>
                 {feedback}
               </div>
             )}
